@@ -14,9 +14,7 @@ codeHeightLimit: 300
 
 ## 前言
 
-平时遇到一些奇怪的代码问题，记录并整理，内容如下：
-
-[[toc]]
+平时遇到一些奇怪的代码问题，记录并整理，内容如下。
 
 ## 博客渲染超时
 
@@ -39,8 +37,6 @@ env | grep -i proxy
 
 可以查看到究竟是哪个环境出现了问题，之后正常使用 bash 或者 python 程序都可以进行修改，本人是发现 `ALL_PROXY` 出现问题：
 
-::: code-group
-
 ```bash
 unset ALL_PROXY
 unset all_proxy
@@ -56,8 +52,6 @@ import os
 os.environ['ALL_PROXY'] = 'http://127.0.0.1:7890'
 os.environ['all_proxy'] = 'http://127.0.0.1:7890'
 ```
-
-:::
 
 重点其实在于找到哪个有问题，并且进行覆盖，`unset` 是严谨起见，其实无所谓。
 
@@ -98,7 +92,7 @@ sudo update-initramfs -u -k all
 
 在上海那边的实验室，登录并且操作集群需要使用堡垒机，在开通账号之后使用 SSH 即可，但是却出现了奇怪的报错，具体内容为 `no matching host key type found. Their offer: ssh-rsa`，一开始我还觉得是类似于服务器那边的一些配置我没有做好，但是详细了解之后发现，按理来说直接使用账号密码在内网中就可以登录，于是问了一下 IT，得到了解决方法，适用于同样报错内容的场景。在 `~/.ssh/config` 中添加以下内容：
 
-```txt
+```txt title="~/.ssh/config"
 HostKeyAlgorithms +ssh-rsa
 PubkeyAcceptedKeyTypes +ssh-rsa
 ```
@@ -113,7 +107,7 @@ PubkeyAcceptedKeyTypes +ssh-rsa
 
 于是复制 conda，这里面我之前安装在了 `~` 下面，也就是先 `cp -r miniconda3 /ssd/gaoning`，然后 `vim .bashrc`：
 
-```bash
+```bash title=".bashrc"
 ...
 export PATH="/home/gaoning/miniconda3/bin:$PATH" # [!code --]
 export PATH="/ssd/gaoning/miniconda3/bin:$PATH" # [!code ++]
@@ -123,14 +117,14 @@ export PATH="/ssd/gaoning/miniconda3/bin:$PATH" # [!code ++]
 
 首先 `mkdir -p /ssd/gaoning/.pip_cache`，然后使用 `vim ~/.pip/pip.conf`，假如说之前没有这个文件（可能你之前没有操作过类似于设置 pip 的 index url 的操作），那就创建一个，然后写入：
 
-```txt
+```txt title="~/.pip/pip.conf"
 [global]
 cache-dir = /ssd/gaoning/.pip_cache/
 ```
 
 但是按照这个操作之后，发现还是有问题，很诡异。然后简单查了一下，就发现问题了，因为在下载的时候其实会使用默认的 TMP 目录，于是需要 `mkdir -p /ssd/gaoning/tmp`，之后 `vim ~/.bashrc`：
 
-```bash
+```bash title=".bashrc"
 export TMPDIR=/ssd/gaoning/tmp
 ```
 
