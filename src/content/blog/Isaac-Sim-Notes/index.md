@@ -179,7 +179,7 @@ code .
 
 然后打开这个新建的文件，在里面输入
 
-```python
+```python title="script.py"
 from isaacsim import SimulationApp
 simulation_app = SimulationApp({"headless": False})
 
