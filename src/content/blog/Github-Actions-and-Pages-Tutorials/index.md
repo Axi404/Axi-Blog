@@ -38,7 +38,7 @@ Github Actions 是一个持续集成和持续部署（CI/CD）平台，它允许
 
 让我们回顾一下这些教程说的内容，首先，在自己的账户中创建一个仓库，这个仓库的名字需要是 `username.github.io`，对于笔者来说，也就是创建一个名为 `Axi404.github.io` 的仓库。
 
-<img src="https://pic.axi404.top/githubio_create.4917dtqb1l.webp" alt="create github.io" style="display: block; margin: 0 auto; zoom: 50%;">
+![create github.io](https://pic.axi404.top/githubio_create.4917dtqb1l.webp)
 
 然后在其中使用某些模板或者其他的内容进行进一步操作。这看上去确实正规，但是不免让人产生了怀疑，那么我的仓库名是不是只能叫做 `username.github.io` 呢？
 
@@ -62,7 +62,7 @@ vim index.html
 
 在 `index.html` 中写入以下内容：
 
-```html
+```html title="index.html"
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -81,7 +81,7 @@ vim index.html
 
 首先创建一个 CSS 文件名为 `styles.css`，在其中写入一些代码。
 
-```css
+```css title="styles.css"
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -104,11 +104,12 @@ p {
 
 然后创建一个JS文件名为 `script.js`，并且在其中输入一些代码：
 
-```javascript
+```javascript title="script.js"
 document.addEventListener('DOMContentLoaded', function() {
     alert('Welcome to My First Website!');
 });
 ```
+
 最后再对 `index.html` 进行一些修改以导入这些内容，包括在 head 中加入 `<link rel="stylesheet" href="styles.css">` 以及在 body 的末尾加入 `<script src="script.js"></script>`，这样便大功告成了。
 
 假如你使用的是 VS Code 之类的编辑器，使用 `Live Server` 可以对这个页面进行实时阅览，十分好用，或者正常的 Linux 命令行，使用 `xdg-open` 打开文件进行预览也是可以的（指在具有桌面 GUI 以及默认浏览器的系统中）。
@@ -123,17 +124,17 @@ git push
 
 之后前往 `Github` 上面，依次添加 `Setting -> Pages -> None -> main -> save`，完成设置，流程可以如下所示：
 
-<img src="https://pic.axi404.top/github_pages.51e2vk6wru.webp" alt="github pages setting" style="display: block; margin: 0 auto; zoom: 50%;">
+![github pages setting](https://pic.axi404.top/github_pages.51e2vk6wru.webp)
 
 不难发现后方的名为 `/(root)` 的选项，即你的 `index.html` 所在的目录，我们这里使用默认的根目录即可，后续我们会知道，使用自定义的 Github Actions 也可以做到相同的效果。
 
 在点击 save 之后可以点击上方的 Actions 看到一个 deployment 的 action 正在 `queue` 或者正在 `Pending`，等待部署结束即可。
 
-<img src="https://pic.axi404.top/actions_start.45m1pt4yo.webp" alt="github actions pending" style="display: block; margin: 0 auto; zoom: 50%;">
+![github actions pending](https://pic.axi404.top/actions_start.45m1pt4yo.webp)
 
 此时再次回到 Pages 的界面，可以看到页面已经部署，并且给出了 url 链接。
 
-<img src="https://pic.axi404.top/pages_deploy_ready.9gwi0tjazu.webp" alt="github pages ready" style="display: block; margin: 0 auto; zoom: 50%;">
+![github pages ready](https://pic.axi404.top/pages_deploy_ready.9gwi0tjazu.webp)
 
 之后再次进行的部署流程会比这个简单很多，只需要在修改了内容之后重新 commit 并且 push 即可，剩下的内容 Github Actions 会帮助你完成，这是得力于这个 Action 对你的 push 操作的检测（被触发）。
 
@@ -163,7 +164,7 @@ npm install gh-pages --save-dev
 
 首先修改 `vue.config.js`：
 
-```js
+```js title="vue.config.js"
 module.exports = {
   publicPath: process.env.NODE_ENV === 'production'
     ? '/cs-baoyan-ddl/' // your repo's name
@@ -175,7 +176,7 @@ module.exports = {
 
 之后修改 `package.json`，加入 deploy部分：
 
-```json
+```json title="package.json"
 "scripts": {
   "build": "vue-cli-service build",
   "serve": "vue-cli-service serve",
@@ -187,7 +188,7 @@ module.exports = {
 
 之后在 `.github/workflows/deploy.yml` 中添加以下内容：
 
-```yml
+```yml title=".github/workflows/deploy.yml"
 name: Deploy to GitHub Pages
 
 on:
@@ -256,7 +257,7 @@ CSDDL 的另一关键组成便是其数据库，也就是 BoardCaster。众所�
 
 不难给出 Github Actions 脚本：
 
-```yml
+```yml title=".github/workflows/deploy.yml"
 name: Update JSON from BoardCaster
 
 on:
