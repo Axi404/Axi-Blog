@@ -8,11 +8,13 @@ category: 'MISCs'
 tags:
     - 'Tech Talk'
     - Bug Report
-codeHeightLimit: 300
+    - Sogou
 ---
 
 
 众所周知，在 Ubuntu 系统中，假如说在安装的时候选择了中文作为语言（一般来说我在写教程的时候会推荐这么做，之后再把中文换回英文，而把输入法留下来），那么你的电脑中会包含一个 Ubuntu 的默认的输入法，然而不说这个输入法不是很符合中国人的说话习惯，其也很难根据你的打字来学习你的打字习惯。一般来说唯一的解决方案就是使用搜狗输入法。
+
+## 安装
 
 具体的方法如下：
 
@@ -36,6 +38,8 @@ sudo apt install fcitx
 ![](https://pic.axi404.top/image.8hgf6x8yun.webp)
 </div>
 </div>
+
+## 安装依赖
 
 之后再安装一些依赖并且删除 ibus。
 

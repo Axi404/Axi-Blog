@@ -63,7 +63,7 @@ OpenVLA 是一个具身智能大模型，Open 在这里就是 Open Source 的意
 
 简单让 GPT4-o 生成了 `vla-scripts/train.py` 的逐行注释，如下：
 
-```python
+```python title="vla-scripts/train.py"
 """
 train.py
 
