@@ -85,8 +85,8 @@ export const integ: IntegrationUserConfig = {
     applyTip: {
       name: theme.title,
       desc: theme.description || 'Null',
-      url: 'https://astro-pure.js.org',
-      avatar: 'https://astro-pure.js.org/favicon/favicon.ico'
+      url: 'https://axi404.top',
+      avatar: 'https://axi404.top/avatar/avatar.webp'
     }
   },
   // Enable page search function
