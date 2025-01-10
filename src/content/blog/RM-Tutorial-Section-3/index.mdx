@@ -12,6 +12,7 @@ tags:
     - Ubuntu
 top: 1
 ---
+import { Aside } from 'astro-pure/user'
 
 ## 前言
 
@@ -56,9 +57,9 @@ Linux 系统是一套免费使用和自由传播的类 Unix 操作系统，是�
 
 首先对于安装 Ubuntu 系统的电脑来说，根据本人个人经验，假如说是想配置一套可以长期使用的 Ubuntu 系统，电脑应当有一段完整的空白的空间位于某一分区的末尾，并且大小在 100GB 左右（假如说只是用于基础的编程，或许40GB左右就可以）。
 
-:::info Info
+<Aside type='note'>
 众所周知分区的设置也是有讲究的，因为磁盘的存储本质上是有序的，可以理解为一条存储空间，假如说你的一个分区占用了其中的一部分，而且只在这部分的头和尾存了东西，中间确实有大片的空白，但是你并不能把它切出来。不过一些使用碎片整理的方法或许是有帮助的。
-:::
+</Aside>
 
 ### 选择双系统而非虚拟机
 
@@ -84,9 +85,9 @@ Linux 系统是一套免费使用和自由传播的类 Unix 操作系统，是�
 
 让我用通俗的流程来讲解一下，以下讲解下载并安装 `Ubuntu20.04.5`：
 
-:::warning
+<Aside type='caution'>
 **请注意，本文写作时队伍中系统版本与讲解安装均为Ubuntu20.04.5，而如今Ubuntu20.04已经变为20.04.6，请读者选择20.04.6版本安装，区别仅在于下载的iso文件不同，其他的内容均相同，只是换了个名字。本文大多数名称与图片均进行了更新，但若仍然存在混淆，请勿介意。**
-:::
+</Aside>
 
 1. 从清华源下载 [ubuntu-20.04.6-desktop-amd64.iso](https://mirrors.tuna.tsinghua.edu.cn/ubuntu-releases/20.04.6/ubuntu-20.04.6-desktop-amd64.iso)（点一下直接下载，或者不行的话可以手动前往 [清华源界面](https://mirrors.tuna.tsinghua.edu.cn/ubuntu-releases/20.04.6/) 选择 `ubuntu-20.04.6-desktop-amd64.iso` 下载）。（Ubuntu 22.04 使用链接 [22.04.4](https://mirrors.tuna.tsinghua.edu.cn/ubuntu-releases/22.04.4/)，选择 [ubuntu-22.04.4-desktop-amd64.iso](https://mirrors.tuna.tsinghua.edu.cn/ubuntu-releases/22.04.4/ubuntu-22.04.4-desktop-amd64.iso)）。
 2. 下载 [Ventoy-LatestRelease](https://mirrors.nju.edu.cn/github-release/ventoy/Ventoy/LatestRelease/)（从 GitHub 下载需要一定网络条件，此处选择的链接源自南京大学镜像站），或者不行的话手动前往其 [官网](https://www.ventoy.net/cn/index.html) 挑选下载，如下载 [ventoy-1.0.99-windows.zip](https://mirrors.nju.edu.cn/github-release/ventoy/Ventoy/LatestRelease/ventoy-1.0.99-windows.zip)。
@@ -98,9 +99,9 @@ Linux 系统是一套免费使用和自由传播的类 Unix 操作系统，是�
 
 在这里可以解释一下 Ventoy 的特性，这是一个可以制作多系统启动盘的软件，安装在你的 U 盘之后，一切被拷入的系统配置文件都会被自动配置，在重启并按照正常安装系统流程操作的过程中会出现一个菜单界面（下图），供你选择你想要安装的系统，而同时这个 U 盘也可以用于常规的拷贝文件与储存。
 
-:::tip
+<Aside type='tip'>
 在这里仅为对于启动盘的描述，详细的安装步骤在后续讲解。
-:::
+</Aside>
 
 ![](https://pic.axi404.top/Ventoy菜单界面.45meg8u8y.webp)
 
@@ -110,11 +111,11 @@ Linux 系统是一套免费使用和自由传播的类 Unix 操作系统，是�
 
 ### 准备空间
 
-:::warning
+<Aside type='caution'>
 在安装系统之前需要注意，自己的系统盘格式为 MBR 还是 GPT，我们的教程在 GPT 格式下进行，因此不确定在 MBR 中的适配性。现在绝大多数的硬盘应该全部为 GPT 格式，但是保险起见，可以进行检查。
 按下 `Win+R` 进入运行窗口，输入 `diskpart`，进入磁盘管理界面，输入 `list disk`，可以看到 GPT 格式的磁盘在表格中标记有星号。
 ![](https://Axi404.github.io/picx-images-hosting/image.8s38wkp596.webp)
-:::
+</Aside>
 
 首先，在安装系统之前，还记得我们之前说的吗？要保证你有空闲的 100GB 空间，当然，这前提是，你失去了这 100GB 空间之后，你的 Windows 系统的空间依然不会显得逼仄（尤其是 C 盘，Windows 系统的文件会不断变大，假如说不知道缩减方法，不建议盲目删除一些东西，而也因此需要为 C 盘留下一定的空间余量）。
 

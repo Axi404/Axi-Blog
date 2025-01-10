@@ -11,12 +11,15 @@ tags:
 top: 1
 codeHeightLimit: 300
 ---
+import { Aside } from 'astro-pure/user'
 
 最近正在配置 AnyGrasp，在这里记录一下遇到的问题。我的环境为 Ubuntu 22.04, CUDA 12.1, cudnn 9.3.0。
 
-:::info
+<Aside type='note'>
 之前其实写过一版，但是感觉不是很详细，至少照着看是不能无痛安装的，所以说换了一个新的，并且重新写一下。
-:::
+</Aside>
+
+## 基础配置
 
 首先先给出 AnyGrasp 的 Github 仓库链接：[https://github.com/graspnet/anygrasp_sdk](https://github.com/graspnet/anygrasp_sdk)，其中的 `Installation` 部分给出了简略的安装步骤，但是因为其依赖的 MinkowskiEngine 已经年久失修，所以需要一些额外的操作。
 
@@ -27,6 +30,8 @@ conda create -n anygrasp python=3.10
 conda install openblas-devel -c anaconda
 pip install torch 'numpy<1.23' ninja
 ```
+
+## MinkowskiEngine
 
 接下来可以开始配置第一步，也就是 MinkowskiEngine：
 
@@ -117,6 +122,8 @@ auto __raw = std::__to_address(__r.get()); // [!code ++]
 
 之后照常安装即可。
 
+## AnyGrasp
+
 之后安装 `anygrasp_sdk`：
 
 ```bash
@@ -124,6 +131,8 @@ git clone https://github.com/graspnet/anygrasp_sdk.git
 cd anygrasp_sdk
 pip install -r requirements.txt
 ```
+
+## PointNet2
 
 之后安装 `pointnet2`：
 
@@ -149,6 +158,8 @@ sudo apt install gcc-12 g++-12
 ```
 
 之后正常安装即可。
+
+## License Checker
 
 最后是使用 AnyGrasp 需要 Key，而这个 Key 需要生成，因此需要使用 `./license_checker -f`，而因为 Ubuntu 22.04，这个也会报错，一个是缺少 `libcrypto.so.1.1`，一个是 `sh: 1: ifconfig: not found`。
 
