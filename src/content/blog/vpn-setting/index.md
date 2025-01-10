@@ -26,7 +26,7 @@ tags:
 
 之后就可以进行正常的 SSH 了，在这里因为是使用跳板机，对于 `C:/Users/user_name/.ssh/config` 进行修改：
 
-```txt
+```txt title=".ssh/config"
 Host *
     ServerAliveInterval 60
 Host jump_server
