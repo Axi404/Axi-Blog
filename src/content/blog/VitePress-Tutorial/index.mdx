@@ -9,6 +9,7 @@ tags:
     - 'Tech Talk'
     - 'VitePress'
 ---
+import { Aside } from 'astro-pure/user'
 
 ## 前言
 
@@ -162,7 +163,7 @@ Are you sure you want continue connecting(yes/no/[fingerprint])?
 
 前往 `docs/.vitepress/config.mts` 中，可以在找到如下文所示内容，以下以其中的人生篇为例：
 
-```ts
+```ts title="docs/.vitepress/config.mts"
 export default defineConfig({
     ...
     themeConfig:{
@@ -185,7 +186,7 @@ export default defineConfig({
 
 在其中找到你想要插入的位置，VitePress 会根据 items 中的顺序来排列 Sidebar，例如贡献者创建了文档 `人生思考`，并认为在排版布局中应位于 `关于西交` 与 `开源精神` 之间，则加入一行即可：
 
-```ts
+```ts title="docs/.vitepress/config.mts"
 export default defineConfig({
     ...
     themeConfig:{
@@ -287,7 +288,7 @@ pnpm vitepress init
 
 在本地预览没有问题之后，就可以进行 Github 部署了，首先需要新建一个仓库，例如 `Example`，然后在 `docs/.vitepress/config.mts` 中添加如下内容：
 
-```ts
+```ts title="docs/.vitepress/config.mts"
 export default defineConfig({
     ...,
     base: '/Example/' // 若仓库为 username.github.io，则 base 为 /
@@ -296,7 +297,7 @@ export default defineConfig({
 
 与仓库建立链接（详细方法见本人 [关于 Git 的博客](https://axi404.github.io/Blog/p/git-%E7%9A%84%E5%B8%B8%E8%A7%81%E6%93%8D%E4%BD%9C/#%E5%85%B3%E8%81%94%E6%96%B0%E5%BB%BA%E4%BB%93%E5%BA%93)）之后，在根目录下创建一个 `.github/workflows/deploy.yml`
 
-```yml
+```yml title=".github/workflows/deploy.yml"
 # 构建 VitePress 站点并将其部署到 GitHub Pages 的示例工作流程
 #
 name: Deploy VitePress site to Pages
