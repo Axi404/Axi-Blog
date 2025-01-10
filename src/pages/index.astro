@@ -1,20 +1,17 @@
 ---
 import { Image } from 'astro:assets'
 
-import { Quote } from 'astro-pure/advanced'
 import { PostPreview } from 'astro-pure/components/pages'
 import { getBlogCollection, sortMDByDate } from 'astro-pure/server'
-import { Button, Card, Icon, Label } from 'astro-pure/user'
+import { Button, Card, Icon, Label, Spoiler } from 'astro-pure/user'
 import PageLayout from '@/layouts/BaseLayout.astro'
-import ProjectCard from '@/components/home/ProjectCard.astro'
 import Section from '@/components/home/Section.astro'
 import SkillLayout from '@/components/home/SkillLayout.astro'
 import avatar from '@/assets/avatar.webp'
 import config from '@/site-config'
 
-const languages = ['Html', 'JavaScript', 'CSS', 'Shell']
-const frontend = ['TypeScript', 'Vite', 'Webpack', 'Astro']
-const backend = ['Vercel', 'Waline']
+const languages = ['Python', 'C++', 'C', 'Shell']
+const ai_skills = ['Pytorch', 'Isaac Sim']
 
 const MAX_POSTS = 10
 const allPosts = await getBlogCollection()
@@ -69,7 +66,7 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
 
     <div id='content' class='animate flex flex-col gap-y-10 md:w-4/5 lg:w-5/6'>
       <Section title='About'>
-        <p class='text-muted-foreground'>学生 / 可爱猫娘</p>
+        <p class='text-muted-foreground'>学生 / <Spoiler>可爱猫娘</Spoiler></p>
         <p class='text-muted-foreground'>
           我是一名来自西安交通大学的人工智能专业的在读生，是 22 级。我正在上海人工智能实验室（SHAILAB）的具身智能中心中进行科研实习，从事具身智能 manipulation 领域的研究。
         </p>
@@ -92,12 +89,24 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
       <Section title='Education'>
         <Card
           as='a'
+          heading='上海人工智能实验室'
+          subheading='具身智能中心，实习生'
+          date='Jul 2024 - Present'
+          href='https://www.shlab.org.cn/'
+        >
+        </Card>
+        <Card
+          as='a'
           heading='西安交通大学'
           subheading='人工智能专业，本科'
           date='Sep 2022 - Present'
           href='http://www.aiar.xjtu.edu.cn/'
         >
         </Card>
+      </Section>
+      <Section title='Skills'>
+        <SkillLayout title='Languages' skills={languages} />
+        <SkillLayout title='AI Skills' skills={ai_skills} />
       </Section>
     </div>
   </main>

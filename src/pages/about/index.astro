@@ -1,9 +1,8 @@
 ---
 import { Comment } from 'astro-pure/advanced'
-import { Button, Collapse, Spoiler, Timeline } from 'astro-pure/user'
+import { Button, Spoiler } from 'astro-pure/user'
 import PageLayout from '@/layouts/CommonPage.astro'
 import Substats from '@/components/about/Substats.astro'
-import ToolSection from '@/components/about/ToolSection.astro'
 
 const headings = [
   { depth: 2, slug: 'social-networks', text: 'Social Networks' },
@@ -11,7 +10,7 @@ const headings = [
 ---
 
 <PageLayout title='About' {headings} info='/about'>
-  <p>学生 / 可爱猫娘</p>
+  <p>学生 / <Spoiler>可爱猫娘</Spoiler></p>
   <p>
     我是一名来自西安交通大学的人工智能专业的在读生，是 22 级。我正在上海人工智能实验室（SHAILAB）的具身智能中心中进行科研实习，从事具身智能 manipulation 领域的研究。
   </p>
