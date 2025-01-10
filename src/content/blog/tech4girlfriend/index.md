@@ -20,21 +20,21 @@ codeHeightLimit: 300
 
 - 下载软件 NextChat，网址是 [https://github.com/ChatGPTNextWeb/ChatGPT-Next-Web/releases](https://github.com/ChatGPTNextWeb/ChatGPT-Next-Web/releases)。
 
-<img src="https://pic.axi404.top/image.1hs7tvsckm.webp" alt="image" style="zoom: 50%;"/>
+![image](https://pic.axi404.top/image.1hs7tvsckm.webp)
 
 - 在这个界面里面，存在一个选项，以 `_x64-setup.exe` 结尾，这个是 64 位的安装包，单击下载。下载完成之后双击打开。
 - 可能显示阻止程序启动，点击更多信息，然后点击仍要运行。
 
 <div style="display: flex; justify-content: space-between; width: 50%;">
-    <img src="https://pic.axi404.top/image-20241025105559429.2obj2hlaks.webp" alt="image-20241025105559429" style="width: 50%;"/>
-    <img src="https://pic.axi404.top/image-20241025105646131.26lhdwjwzv.webp" alt="image-20241025105646131" style="width: 50%;"/>
+    <img src="https://pic.axi404.top/image-20241025105559429.2obj2hlaks.webp" alt="image-20241025105559429"/>
+    <img src="https://pic.axi404.top/image-20241025105646131.26lhdwjwzv.webp" alt="image-20241025105646131"/>
 </div>
 
 - 正常选择一些信息，比如说安装位置。创建一个桌面快捷方式，并且运行程序
 
 <div style="display: flex; justify-content: space-between; width: 50%;">
-    <img src="https://pic.axi404.top/image-20241025105823050.4n7pstzhth.webp" alt="image-20241025105823050" style="width: 50%;"/>
-    <img src="https://pic.axi404.top/image-20241025105920538.7i0dymeol2.webp" alt="image-20241025105920538" style="width: 50%;"/>
+    <img src="https://pic.axi404.top/image-20241025105823050.4n7pstzhth.webp" alt="image-20241025105823050"/>
+    <img src="https://pic.axi404.top/image-20241025105920538.7i0dymeol2.webp" alt="image-20241025105920538"/>
 </div>
 
 ### 配置 NextChat
@@ -43,7 +43,7 @@ NextChat 本质上是一个 GPT 套壳工具，我们可以使用它来调用 GP
 
 - 点击设置
 
-<img src="https://pic.axi404.top/image-20241025110227448.7i0dymeol3.webp" alt="image-20241025110227448" style="width: 70%;"/>
+<img src="https://pic.axi404.top/image-20241025110227448.7i0dymeol3.webp" alt="image-20241025110227448"/>
 
 - 向下翻，可以找到接口地址以及 API Key 两项
 
@@ -55,25 +55,25 @@ NextChat 本质上是一个 GPT 套壳工具，我们可以使用它来调用 GP
 - 将 API Key 修改为你的转发站的 API Key。
 - 在下方的 Model 中下拉并且找到 GPT-4o
 
-<img src="https://pic.axi404.top/image-20241025110635564.3goek8al88.webp" alt="image-20241025110635564" style="width: 70%;"/>
+<img src="https://pic.axi404.top/image-20241025110635564.3goek8al88.webp" alt="image-20241025110635564"/>
 
 ### 开始聊天
 
 - 点击新的聊天：
 
-<img src="https://pic.axi404.top/image-20241025110738804.92q4y3gnu7.webp" alt="image-20241025110738804" style="width: 70%;"/>
+<img src="https://pic.axi404.top/image-20241025110738804.92q4y3gnu7.webp" alt="image-20241025110738804"/>
 
 - 对于跳出的面具显示，选择不再展示，然后确认：
 
-<img src="https://pic.axi404.top/image-20241025110808454.32hytd6wmy.webp" alt="image-20241025110808454" style="width: 70%;"/>
+<img src="https://pic.axi404.top/image-20241025110808454.32hytd6wmy.webp" alt="image-20241025110808454"/>
 
 - 对于全部下方的按钮，只需要在意这个机器人图标，即使用的模型，可以看一下是否是 GPT-4o：
 
-<img src="https://pic.axi404.top/image-20241025110925563.9kg6moj71y.webp" alt="image-20241025110925563" style="width: 70%;"/>
+<img src="https://pic.axi404.top/image-20241025110925563.9kg6moj71y.webp" alt="image-20241025110925563"/>
 
 - 然后正常打字，打个招呼吧~
 
-<img src="https://pic.axi404.top/image-20241025111236371.8vmx2nucvt.webp" alt="image-20241025111236371" style="width: 70%;"/>
+<img src="https://pic.axi404.top/image-20241025111236371.8vmx2nucvt.webp" alt="image-20241025111236371"/>
 
 猫猫是一种可爱的生物！
 
@@ -83,7 +83,7 @@ NextChat 本质上是一个 GPT 套壳工具，我们可以使用它来调用 GP
 
 首先点击 `F12`（关闭这个页面可以点击 `x` 或者再次点击 `F12`） 并且点击 Network，这可以让我们看到网页的请求信息（本网站的网页播放视频的逻辑是最为基础的，直接请求，也就是进入网页之后，会类似于在下载一样，从服务器中一直下载内容，而播放就是一边下载一边播放）。
 
-<img src="https://pic.axi404.top/Pasted-image-20240602084009.6bh2q22kn6.webp" alt="Pasted-image-20240602084009" style="width: 50%;"/>
+<img src="https://pic.axi404.top/Pasted-image-20240602084009.6bh2q22kn6.webp" alt="Pasted-image-20240602084009"/>
 
 点击 Media 可以进行一下筛选，就只会看到目的是视频的请求了，这时候一般会出现四个请求，假如没出现的话，刷新一下课程页面。可以见到一般来说的四个内容，其中后两个（不是 `preview` 开头的内容）是视频资源。
 
@@ -91,8 +91,8 @@ NextChat 本质上是一个 GPT 套壳工具，我们可以使用它来调用 GP
 
 假如说希望看 PPT，可以两个都下载，不过还是建议拿到 PPT 课件，配上正常的讲台视角+电脑录屏来使用。
 
-<img src="https://pic.axi404.top/Pasted-image-20240602084301.45opw6tj8.webp" alt="Pasted-image-20240602084301" style="width: 50%;"/>
+<img src="https://pic.axi404.top/Pasted-image-20240602084301.45opw6tj8.webp" alt="Pasted-image-20240602084301"/>
 
 点击某一个视频源，比如说这个 0 开头的，可以看到右侧的 Headers 里面有一项为 Request URL，后面跟着一大堆链接，复制这个链接，然后新建标签页，打开这个链接，会提示视频下载，下载即可。
 
-<img src="https://pic.axi404.top/Pasted-image-20240602084400.3yeg8uorgj.webp" alt="Pasted-image-20240602084400" style="width: 50%;"/>
+<img src="https://pic.axi404.top/Pasted-image-20240602084400.3yeg8uorgj.webp" alt="Pasted-image-20240602084400"/>
