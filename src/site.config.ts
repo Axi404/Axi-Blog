@@ -70,7 +70,7 @@ export const theme: ThemeUserConfig = {
   content: {
     externalLinksContent: ' ↗',
     /** Blog page size for pagination (optional) */
-    blogPageSize: 8,
+    blogPageSize: 15,
     externalLinkArrow: true, // show external link arrow
     // Currently support weibo, x, bluesky
     share: ['weibo', 'x', 'bluesky']
