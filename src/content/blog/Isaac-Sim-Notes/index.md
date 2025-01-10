@@ -9,7 +9,6 @@ tags:
     - 'Tech Talk'
     - 'Embodied AI'
     - Isaac Sim
-top: 1
 ---
 
 ## 前言

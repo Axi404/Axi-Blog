@@ -8,7 +8,6 @@ category: 'Daily Talk'
 tags:
     - 'Daily Talk'
     - 'Weekly Journal'
-top: 1
 ---
 
 这一次倒也没有像之前一样迟到太多，或者说，这一次周记其实是按时在写的，倒是也可以记录下来一些当时的感受。

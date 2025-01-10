@@ -9,7 +9,6 @@ tags:
     - 'Tech Talk'
     - RoboMaster
     - C++
-top: 1
 ---
 
 ## 欢迎来到视觉组

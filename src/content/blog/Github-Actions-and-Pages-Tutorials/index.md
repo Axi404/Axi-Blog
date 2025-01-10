@@ -9,7 +9,6 @@ tags:
     - 'Tech Talk'
     - 'Github Action'
     - 'Github Pages'
-top: 1
 ---
 
 ## 前言

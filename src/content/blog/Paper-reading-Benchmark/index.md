@@ -8,7 +8,6 @@ category: 'Paper Reading'
 tags:
     - 'AI Talk'
     - Benchmark
-top: 1
 ---
 
 ## 前言

@@ -8,7 +8,6 @@ category: 'Daily Talk'
 tags:
     - 'Daily Talk'
     - 'Weekly Journal'
-top: 1
 ---
 
 ## 序言

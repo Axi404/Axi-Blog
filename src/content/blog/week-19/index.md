@@ -8,7 +8,6 @@ category: 'Daily Talk'
 tags:
     - 'Daily Talk'
     - 'Weekly Journal'
-top: 1
 ---
 
 尽管说起来上一次，说的是记完上一次之后就很快要记这一周，然而因为各种各样的事情还是耽搁了，事实上确实是科研的压力太大了，而且还伴随着其他的琐事。

@@ -8,7 +8,6 @@ category: 'Daily Talk'
 tags:
     - 'Daily Talk'
     - 'Weekly Journal'
-top: 1
 ---
 
 所以说，又是很久之后的一次周记，主要有几件事情可以记录，但是和之前相比还是大差不差。

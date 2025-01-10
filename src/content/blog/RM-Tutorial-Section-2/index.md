@@ -9,7 +9,6 @@ tags:
     - 'Tech Talk'
     - RoboMaster
     - C++
-top: 1
 ---
 
 ## 前言

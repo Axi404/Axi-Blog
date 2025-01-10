@@ -8,7 +8,6 @@ category: 'Daily Talk'
 tags:
     - 'Daily Talk'
     - 'Weekly Journal'
-top: 1
 ---
 
 可以说这一周是我度过的最折磨的一周了，往前追溯，可能要到九月份的时候，那时候需要三线程打工，这一周需要做的事情虽然基本上是单线程，但是可以说是有过之无不及。

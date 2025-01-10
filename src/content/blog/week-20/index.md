@@ -8,7 +8,6 @@ category: 'Daily Talk'
 tags:
     - 'Daily Talk'
     - 'Weekly Journal'
-top: 1
 ---
 
 上一周的周记，事实上写的时候这一周也已经过完了，所以有点故意卖关子的意思，事实上，CVPR 还是赶上了。

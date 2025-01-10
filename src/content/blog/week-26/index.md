@@ -8,7 +8,6 @@ category: 'Daily Talk'
 tags:
     - 'Daily Talk'
     - 'Weekly Journal'
-top: 1
 ---
 
 早安，周记，我是你们的主持人阿汐。这周的通宵是满打满算整整七个，但是两个考试也来了，我看你们全要泡汤。

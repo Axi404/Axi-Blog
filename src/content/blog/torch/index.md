@@ -8,7 +8,6 @@ category: 'MISCs'
 tags:
     - 'Tech Talk'
     - Bug Report
-top: 1
 ---
 
 因为之前的 Ubuntu 系统又因为我自己的不小心所以坏掉了，于是又一次尝试重装系统，但是出现了很多的问题。

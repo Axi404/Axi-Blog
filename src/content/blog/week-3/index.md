@@ -8,7 +8,6 @@ category: 'Daily Talk'
 tags:
     - 'Daily Talk'
     - 'Weekly Journal'
-top: 1
 ---
 
 于是我履行诺言，在今天开始写第三周内容，第一次提笔的时候应该是星期四的凌晨，准确的说是五点多，今天上午有专业实习的参观，大概在车上可以睡会儿觉。

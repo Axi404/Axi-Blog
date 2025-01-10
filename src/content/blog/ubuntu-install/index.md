@@ -8,7 +8,6 @@ category: 'MISCs'
 tags:
     - 'Tech Talk'
     - Bug Report
-top: 1
 ---
 
 因为 Ubuntu 20.04 的若干的内容已经不再支持，使用起来最新的一些软件基本上全是报错，比较经典的就是 `GLIBC 2.3.1` 以及 `libssl.so.3` 等内容，而前者的安装十分的麻烦，所以干脆直接安装三系统。

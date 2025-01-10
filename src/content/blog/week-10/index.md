@@ -8,7 +8,6 @@ category: 'Daily Talk'
 tags:
     - 'Daily Talk'
     - 'Weekly Journal'
-top: 1
 ---
 
 于是乎也算是写到了第十篇周记了，可以说是可喜可贺，当初创建博客的时候，还有回忆过之前的 WordPress 创作经历，可以说还是花钱不讨好，而现在居然已经坚持了十周的周记。

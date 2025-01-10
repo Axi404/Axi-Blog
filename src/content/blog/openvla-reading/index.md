@@ -10,7 +10,6 @@ tags:
     - LLM
     - 'Code Reading'
     - 'Embodied AI'
-top: 1
 ---
 
 因为要开始入门具身智能，所以说要阅读代码，显然选择了开源的 OpenVLA，于是在这里记录一下代码的阅读过程。

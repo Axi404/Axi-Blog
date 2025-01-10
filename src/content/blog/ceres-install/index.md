@@ -8,7 +8,6 @@ category: 'Tech Talk'
 tags:
     - 'Tech Talk'
     - Bug Report
-top: 1
 codeHeightLimit: 300
 ---
 

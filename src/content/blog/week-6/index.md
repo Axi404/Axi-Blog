@@ -8,7 +8,6 @@ category: 'Daily Talk'
 tags:
     - 'Daily Talk'
     - 'Weekly Journal'
-top: 1
 ---
 
 尽管做过很多的期待，但是第六周的故事实际上确实枯燥无趣，几乎没什么可说的，不过为了记录生活，还是勉强记录一下吧。

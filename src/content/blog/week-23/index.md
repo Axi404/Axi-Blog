@@ -8,7 +8,6 @@ category: 'Daily Talk'
 tags:
     - 'Daily Talk'
     - 'Weekly Journal'
-top: 1
 ---
 
 又是很久之后的一次姗姗来迟的周记，只能说还是很劳累的一个星期，但是确实也没有发生什么其他的大事。

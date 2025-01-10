@@ -8,7 +8,6 @@ category: 'Daily Talk'
 tags:
     - 'Daily Talk'
     - 'Weekly Journal'
-top: 1
 ---
 
 现在貌似周记迟到一两天已经是常态了，不过目前还是写了，而且也没有发现什么会无限拖延下去的威胁，所以说就暂且不去纠正这个坏习惯了。

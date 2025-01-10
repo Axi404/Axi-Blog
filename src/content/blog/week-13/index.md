@@ -8,7 +8,6 @@ category: 'Daily Talk'
 tags:
     - 'Daily Talk'
     - 'Weekly Journal'
-top: 1
 ---
 
 这周的周记又是迟来的一次，不过还是发生了很多事情的，值得记录。

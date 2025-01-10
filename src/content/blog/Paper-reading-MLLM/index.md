@@ -9,7 +9,6 @@ tags:
     - 'AI Talk'
     - LLM
     - VLM
-top: 1
 ---
 
 ## 前言

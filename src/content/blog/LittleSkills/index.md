@@ -8,7 +8,6 @@ category: 'MISCs'
 tags:
     - 'Tech Talk'
     - Bug Report
-top: 1
 ---
 
 ## 前言

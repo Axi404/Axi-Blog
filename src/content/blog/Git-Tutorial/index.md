@@ -8,7 +8,6 @@ category: 'Tech Talk'
 tags:
     - 'Tech Talk'
     - 'Git'
-top: 1
 ---
 
 ## 前言

@@ -10,7 +10,6 @@ tags:
     - LLM
     - VLM
     - 'Embodied AI'
-top: 1
 ---
 
 ## 前言
