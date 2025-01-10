@@ -19,7 +19,7 @@ top: 1
 
 问题出现在，对于任何一个全新的最小安装的 Ubuntu 20.04 系统，在使用 runfile 的时候，均会报错，并说明在 `/var/log/nvidia-installer.log` 中可以看到详情，为：
 
-```txt
+```txt title="nvidia-installer.log"
 -> Error.
 ERROR: An error occurred while performing the step: "Checking to see whether the nvidia kernel module was successfully built". See /var/log/nvidia-installer.log for details.
 -> The command `cd ./kernel; /usr/bin/make -k -j16  NV_EXCLUDE_KERNEL_MODULES="" SYSSRC="/lib/modules/5.15.0-117-generic/build" SYSOUT="/lib/modules/5.15.0-117-generic/build" NV_KERNEL_MODULES="nvidia"` failed with the following output:
@@ -55,7 +55,7 @@ sudo update-alternatives --display g++
 之后再次运行，获得输出：
 
 
-```txt
+```txt title="nvidia-installer.log"
 ===========
 = Summary =
 ===========
@@ -79,7 +79,7 @@ sudo vim ~/.bashrc # or ~/.zshrc
 
 之后在最后添加：
 
-```bash
+```bash title=".bashrc"
 export PATH=/usr/local/cuda-12.1/bin${PATH:+:${PATH}}
 export LD_LIBRARY_PATH=/usr/local/cuda-12.1/lib64\
                          ${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}

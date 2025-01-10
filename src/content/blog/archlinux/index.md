@@ -103,7 +103,7 @@ sudo pacman -S gnome-browser-connector
 
 我安装了 ZSH，其中涉及我的 `.zshrc` 的文件，可以进行一个分享：
 
-```txt
+```txt title=".zshrc"
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
