@@ -86,11 +86,11 @@ top: 1
 
 暂时来看，本人腿型还算不错，所以，还算不错：
 
-<hairy-image-group col="400px" row="400px" loading = "lazy">
-  <hairy-image fit="cover" loading = "lazy" src="https://pic.axi404.top/女装1.6m3tv2tgyq.webp" />
-  <hairy-image fit="cover" loading = "lazy" src="https://pic.axi404.top/女装2.7zqcz44izo.webp" />
-  <hairy-image fit="cover" loading = "lazy" src="https://pic.axi404.top/女装3.8vmueke7fp.webp" />
-</hairy-image-group>
+<div class="grid grid-cols-3 gap-4">
+  <img src="https://pic.axi404.top/女装1.6m3tv2tgyq.webp" class="w-full h-[400px] object-cover" loading="lazy" alt="女装照片1" />
+  <img src="https://pic.axi404.top/女装2.7zqcz44izo.webp" class="w-full h-[400px] object-cover" loading="lazy" alt="女装照片2" />
+  <img src="https://pic.axi404.top/女装3.8vmueke7fp.webp" class="w-full h-[400px] object-cover" loading="lazy" alt="女装照片3" />
+</div>
 
 某种程度上来说，这也确实可以说是我的伪街初体验，虽然距离裙子还差不少，但是我不会化妆，所以那种还是暂且搁置吧。
 
