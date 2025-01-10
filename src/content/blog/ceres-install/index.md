@@ -8,10 +8,13 @@ category: 'Tech Talk'
 tags:
     - 'Tech Talk'
     - Bug Report
+    - Ceres
 codeHeightLimit: 300
 ---
 
 在 Ubuntu 22.04 安装 Ceres 1.14，出现了一些之前在 Ubuntu 20.04 没有出现过的问题，所以在这里记录一下，以及写一下解决的方法。
+
+## 默认安装
 
 首先先安装一下依赖：
 
@@ -27,6 +30,8 @@ unzip 1.14.0.zip
 cd ceres-solver-1.14.0
 ```
 
+## 报错处理
+
 如果直接进行编译会出现两个报错，一个来自于 `tbb_stddef.h`，另一个则是 `gtest`。
 
 前者进行：
@@ -39,7 +44,7 @@ sudo gedit tbb_stddef.h
 
 输入：
 
-```cpp
+```cpp title="tbb_stddef.h"
 /*
     Copyright (c) 2005-2020 Intel Corporation
 
@@ -609,7 +614,7 @@ struct STATIC_ASSERTION_FAILED<true>; //intentionally left undefined to cause co
 
 后者则需要在 `CMakeList.txt` 中取消 `Test`：
 
-```cmake
+```cmake title="CMakeList.txt"
 # Enable the use of Eigen as a sparse linear algebra library for
 # solving the nonlinear least squares problems.
 option(EIGENSPARSE "Enable Eigen as a sparse linear algebra library." ON)
