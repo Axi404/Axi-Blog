@@ -82,12 +82,12 @@ export const integ: IntegrationUserConfig = {
     logbook: [
     ],
     // Yourself link info
-    applyTip: {
-      name: theme.title,
-      desc: theme.description || 'Null',
-      url: 'https://axi404.top',
-      avatar: 'https://axi404.top/avatar/avatar.webp'
-    }
+    applyTip: [
+      { name: 'Name', val: theme.title },
+      { name: 'Desc', val: theme.description || 'Null' },
+      { name: 'Link', val: 'https://axi404.top' },
+      { name: 'Avatar', val: 'https://axi404.top/avatar/avatar.webp' }
+    ]
   },
   // Enable page search function
   pagefind: true,
