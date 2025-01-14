@@ -1,7 +1,7 @@
 ---
 title: 'Paper Reading: MLLM'
 publishDate: 2024-09-09
-updatedDate: 2024-09-09
+updatedDate: 2025-01-15
 description: 一些和多模态相关的论文阅读，从 CLIP 开始，向后延伸。
 heroImage: {src : "thumbnail.webp", color: '#000000' }
 category: 'Paper Reading'
@@ -11,6 +11,53 @@ tags:
     - VLM
 ---
 
+export function FunctionTable({ id, tldr, rank, children }) {
+  return (
+    <div className='border rounded-xl p-4'>
+      <div class='inline-flex items-stretch gap-2 rounded-full border pe-3'>
+        <span class='flex items-center shrink-0 text-sm bg-primary-foreground text-primary px-2.5 rounded-full'>
+          Arxiv ID
+        </span>
+        <samp className='break-all text-foreground'>
+          <a href={`https://arxiv.org/abs/${id}`} target='_blank' rel='noopener noreferrer'>
+            {id}
+          </a>
+        </samp>
+      </div>
+      <p class='flex items-center gap-x-3'>
+        <svg xmlns='http://www.w3.org/2000/svg' width='26' height='26' viewBox='0 0 24 24'>
+          <g fill='none'>
+            <path d='m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z' />
+            <path
+              fill='currentColor'
+              d='M13 20a1 1 0 1 1 0 2h-2a1 1 0 1 1 0-2zM12 2c4.41 0 8 3.543 8 7.933c0 3.006-1.522 5.196-2.78 6.494l-.284.283l-.27.252l-.252.22l-.33.27l-.328.244c-.196.138-.34.329-.466.535l-.145.251l-.141.252c-.24.412-.518.766-1.111.766h-3.786c-.593 0-.871-.354-1.11-.766l-.213-.378c-.145-.253-.305-.494-.54-.66l-.232-.171l-.199-.155l-.227-.188l-.252-.22l-.27-.252l-.285-.283C5.522 15.129 4 12.939 4 9.933C4 5.543 7.59 2 12 2m0 2C8.677 4 6 6.665 6 9.933c0 2.624 1.533 4.494 2.593 5.471l.245.218l.22.182l.27.208l.072.052c.315.222.549.531.762.854l.373.582h2.93l.373-.582c.213-.323.447-.632.762-.854l.243-.182l.206-.165l.233-.2C16.342 14.576 18 12.662 18 9.933C18 6.665 15.323 4 12 4m.293 2.293a1 1 0 0 1 1.497 1.32l-.083.094L12.414 9l1.286 1.286c.364.364.392.937.084 1.333l-.084.095l-1.993 1.993a1 1 0 0 1-1.497-1.32l.083-.094L11.586 11L10.3 9.714a1.01 1.01 0 0 1-.084-1.333l.084-.095z'
+            />
+          </g>
+        </svg>
+        {tldr}
+      </p>
+      <div class='function-table-content'>{children}</div>
+      <div class='inline-flex gap-x-1 items-center bg-muted border rounded-full px-3 [&_svg]:text-foreground'>
+        推荐指数：
+        {
+          // print stars (count rank)
+          Array.from({ length: rank }, (_) => (
+            <svg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 24 24'>
+              <g fill='none' fill-rule='evenodd'>
+                <path d='m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z' />
+                <path
+                  fill='currentColor'
+                  d='M10.92 2.868a1.25 1.25 0 0 1 2.16 0l2.795 4.798l5.428 1.176a1.25 1.25 0 0 1 .667 2.054l-3.7 4.141l.56 5.525a1.25 1.25 0 0 1-1.748 1.27L12 19.592l-5.082 2.24a1.25 1.25 0 0 1-1.748-1.27l.56-5.525l-3.7-4.14a1.25 1.25 0 0 1 .667-2.055l5.428-1.176zM12 4.987L9.687 8.959a1.25 1.25 0 0 1-.816.592l-4.492.973l3.062 3.427c.234.262.347.61.312.959l-.463 4.573l4.206-1.854a1.25 1.25 0 0 1 1.008 0l4.206 1.854l-.463-4.573a1.25 1.25 0 0 1 .311-.959l3.063-3.427l-4.492-.973a1.25 1.25 0 0 1-.816-.592z'
+                />
+              </g>
+            </svg>
+          ))
+        }
+      </div>
+    </div>
+  )
+}
+
 ## 前言
 
 本文主要是关于一些 MLLM 相关的论文的阅读工作，一些浅显的 insight 分享，以及，阅读的可能大多数是领域中的主脉络，对于刚刚入门的小白来说，或许这些论文也是值得推荐的。
@@ -19,7 +66,7 @@ Noting 的是，全部的内容都是直接基于论文阅读的，参考资料�
 
 ## CLIP
 
-论文链接：[https://arxiv.org/abs/2103.00020](https://arxiv.org/abs/2103.00020)
+<FunctionTable id='2103.00020' tldr='在 large scale 下面对 Image 和 Text 的 encoder 进行余弦相似度的对齐' rank={4}>
 
 ![The pipeline of CLIP](https://pic.axi404.top/CLIP.7ljx88ttzm.webp)
 
@@ -34,10 +81,11 @@ CLIP 在某种程度上也可以说是一个开山之作，虽然说对多模态
 参考资料：
 
 - CLIP - [https://www.bilibili.com/video/BV1SL4y1s7LQ/](https://www.bilibili.com/video/BV1SL4y1s7LQ/)
+</FunctionTable>
 
 ## ViLT
 
-论文链接：[https://arxiv.org/abs/2102.03334](https://arxiv.org/abs/2102.03334)
+<FunctionTable id='2102.03334' tldr='双 encoder + 用于 fusion 的 transformer 的经典架构' rank={4}>
 
 ![The pipeline of ViLT](https://pic.axi404.top/ViLT.67xe47irzd.webp)
 
@@ -52,11 +100,11 @@ ViLT 也算是比较经典的多模态领域的工作了，这里面需要说的
 参考资料：
 
 - ViLT - [https://www.bilibili.com/video/BV14r4y1j74y/](https://www.bilibili.com/video/BV14r4y1j74y/)
-
+</FunctionTable>
 
 ## ALBEF
 
-论文链接：[https://arxiv.org/abs/2107.07651](https://arxiv.org/abs/2107.07651)
+<FunctionTable id='2107.07651' tldr='除了在 fusion 之后添加损失，在两个 encoder 的输出上也加了损失，使得在 fusion 之前就对齐' rank={4}>
 
 ![The pipeline of ALBEF](https://pic.axi404.top/ALBEF.1ovd18db0t.webp)
 
@@ -69,10 +117,11 @@ ViLT 也算是比较经典的多模态领域的工作了，这里面需要说的
 参考资料：
 
 - 多模态串讲 - [https://www.bilibili.com/video/BV1Vd4y1v77v/](https://www.bilibili.com/video/BV1Vd4y1v77v/)
+</FunctionTable>
 
 ## VLMo
 
-论文链接：[https://arxiv.org/abs/2111.02358](https://arxiv.org/abs/2111.02358)
+<FunctionTable id='2111.02358' tldr='使用三个不同的 FFN 来处理不同的损失/任务，并且分阶段训练' rank={4}>
 
 ![The pipeline of VLMo](https://pic.axi404.top/VLMo.6t71qid8a3.webp)
 
@@ -89,10 +138,11 @@ VLMo 也可以说是一个比较经典的工作，其中提出的主要就是 Mo
 参考资料：
 
 - 多模态串讲 - [https://www.bilibili.com/video/BV1Vd4y1v77v/](https://www.bilibili.com/video/BV1Vd4y1v77v/)
+</FunctionTable>
 
 ## BLIP
 
-论文链接：[https://arxiv.org/abs/2201.12086](https://arxiv.org/abs/2201.12086)
+<FunctionTable id='2201.12086' tldr='正常的 VLMo 框架，使用 caption-filter 框架进行伪标签的生成' rank={5}>
 
 ![The pipeline of BLIP](https://pic.axi404.top/BLIP.3d4pyf3l73.webp)
 
@@ -107,10 +157,11 @@ BLIP 的重点在于，ALBEF 只关注到了 MLM 生成的高质量，然后就�
 参考资料：
 
 - 多模态串讲 - [https://www.bilibili.com/video/BV1fA411Z772/](https://www.bilibili.com/video/BV1fA411Z772/)
+</FunctionTable>
 
 ## CoCa
 
-论文链接：[https://arxiv.org/abs/2205.01917](https://arxiv.org/abs/2205.01917)
+<FunctionTable id='2205.01917' tldr='只使用 Constrastive Loss 以及 Captioning Loss 来实现 One pass 以提升训练效率' rank={3}>
 
 ![The pipeline of CoCa](https://pic.axi404.top/CoCa.41xzifr47n.webp)
 
@@ -123,10 +174,11 @@ CoCa 可以说和 ALBEF 十分的相似，基本上就是和 ALBEF 一模一样�
 参考资料：
 
 - 多模态串讲 - [https://www.bilibili.com/video/BV1fA411Z772/](https://www.bilibili.com/video/BV1fA411Z772/)
+</FunctionTable>
 
 ## BEiT V3
 
-论文链接：[https://arxiv.org/abs/2208.10442](https://arxiv.org/abs/2208.10442)
+<FunctionTable id='2208.10442' tldr='仅使用 LM 的 VLMo' rank={4}>
 
 ![The pipeline of BEiT V3](https://pic.axi404.top/BEiT_V3.8l00lewl5a.webp)
 
@@ -137,10 +189,11 @@ CoCa 可以说和 ALBEF 十分的相似，基本上就是和 ALBEF 一模一样�
 参考资料：
 
 - 多模态串讲 - [https://www.bilibili.com/video/BV1fA411Z772/](https://www.bilibili.com/video/BV1fA411Z772/)
+</FunctionTable>
 
 ## BLIP2
 
-论文链接：[https://arxiv.org/abs/2301.12597](https://arxiv.org/abs/2301.12597)
+<FunctionTable id='2301.12597' tldr='提出了 Q-Former，建立 bridge 并对齐模型' rank={4}>
 
 虽然说名字叫做 BLIP2，但是实际上感觉模型的结构上区别还是很大的，只是说任务比较类似而已。
 
@@ -157,10 +210,11 @@ Stage-1 和正常的 ALBEF 区别不大，之后 stage-2 把输出过 MLP 送给
 参考资料：
 
 - BLIP2 - [https://blog.csdn.net/LoseInVain/article/details/136013909](https://blog.csdn.net/LoseInVain/article/details/136013909)
+</FunctionTable>
 
 ## LLava
 
-论文链接：[https://arxiv.org/abs/2304.08485](https://arxiv.org/abs/2304.08485)
+<FunctionTable id='2304.08485' tldr='使用 projector 来对齐的极简设计，简单且有效' rank={4}>
 
 ![The pipeline of LLava](https://pic.axi404.top/LLava.9rjbu0lhr3.webp)
 
@@ -173,3 +227,4 @@ LLava 比较简单，主要是提出了一种只使用 GPT 的文字功能，就
 参考资料：
 
 - LLava - [https://blog.csdn.net/qq_35812205/article/details/136586853](https://blog.csdn.net/qq_35812205/article/details/136586853)
+</FunctionTable>
