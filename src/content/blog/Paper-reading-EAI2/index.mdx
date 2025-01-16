@@ -117,3 +117,16 @@ HPT 是 Kaiming He 团队在具身领域的新作，可以说是很直接也很�
 
 这篇论文也是十分经典的论文了，使用了 CVAE 的结构来运行。按照说法，CVAE 也就是 conditional VAE，使用了 VAE，并且使用图像+joint position 作为解码器的输入。由于我没有看过 CVAE，但是大概猜测 conditional 在这个里面其实指的是 image 以及 joint position 在解码器的输入，而至于任务本身，就是重建输入到编码器里面的 action。本身论文里面有很多的细节，包括说在 VAE 编码器的时候只使用 joint position 以及在训练的时候使用 L1 损失而非 L2，在这里就不进行展开了。解码器的结构神似 DETR，包含一个编码器以及一个解码器，不过有必要指出的是，这里其实等于说一共有两个编码器，VAE 本身还有一个。ACT 可以说是比较优雅的 VAE 范式的解决方法，但是不得不说的是，VAE 甚至是传统 diffusion 的策略在当下来看都已经过时了，这种策略可能难以作为一个可以大量 scaling up 的一个策略存在，而且令我疑惑的一个点在于，之前的 VAE 以及 CVAE 因为需要生成图像的 diversity 因此一定需要采样这样一个分布，但是在 manipulation 任务里面，需要一个确定性的 policy 生成，采样一个分布并不重要。而且这样下去全部的信息不久都进入 condition 了吗，那 VAE encoder 的意义何在呢？我不是很理解。
 </FunctionTable>
+
+## SceneVerse
+
+<FunctionTable id='2401.09340' tldr='一个 3D Scene 的数据集以及对应的 Caption Model' rank={3}>
+![](https://pic.axi404.top/image.6pnlog61i3.webp)
+
+这篇工作做了一个大型的数据集，里面的全部的 scene 应该以扫描出来的为主，然后使用了不同 level 的标注，这是比较有参考价值的。也就是 Scene Level 的标注，比如说“这是一个有床和衣柜的卧室”，以及一个 object level 的标注，比如说“床”，“衣柜”，以及一个 object ref 的标注，也就是物品之间的关系，比如说“床在衣柜的左边”。其里面提出的 Scene Graph 还是很有效地可以用于表示场景中的相对关系的。
+
+![](https://pic.axi404.top/image.2rv87ruraz.webp)
+
+然后提出了一个模型，这个图应该是画的比较好看，但是不太容易看懂。本身包括一个 PCD Encoder，以及一个 Text Encoder，之后使用一个 Transformer 进行编码，建立了四个损失，也都算是 MLLM 的比较经典设计。一个是 ALEBF 的损失，这里面叫 $\mathcal{L}_{obj}$，在输入到 Transformer 之前，使用一个 MLP 来预测 object 的 3D 坐标，然后使用 ALEBF 的损失来优化；然后是 $\mathcal{L}_{obj}$，在输入到 Transformer 之前，使用一个 MLP 来预测 object 的 3D 坐标，然后使用 ALEBF 的损失来优化；然后是 $\mathcal{L}_{obj}$，在输入到 Transformer 之前，使用一个 MLP 来预测 object 的 3D 坐标，然后使用 ALEBF 的损失来优化；然后是 $\mathcal{L}_{obj}$，在输入到 Transformer 之前，对齐 PCD Encoder 以及 Text Encoder 的输出。然后这里面多了一个 Spatial Attention，其实就是把 Object 的空间信息编码了一下，之后才和 Text Encoder 的信息一起输入到 Transformer 中。然后就是一个 $\mathcal{L}_{MLM}$，以及 Transformer 之后把 PCD 和 Text 进行对齐的 $\mathcal{L}_{ref}$。最后还有一个过了 Spatial Attention 的 $\mathcal{L}_{scene}$。可以说各种地方都加了各种的损失。$\mathcal{L}_{obj}$ 是让 PCD Encoder 包含 Object 全部的表征，$\mathcal{L}_{scene}$ 确保 Spatial Attention 的输出和 Scene Level 的标注一致，也就是 Spatial 之后真的编码出了这个场景，$\mathcal{L}_{ref}$ 和 $\mathcal{L}_{MLM}$ 则是保证 Fusion 之后的信息的准确性。中规中矩，十分合理。
+
+</FunctionTable>
