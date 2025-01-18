@@ -8,7 +8,7 @@ category: 'Tech Talk'
 tags:
     - 'Tech Talk'
     - 'Embodied AI'
-    - Isaac Sim
+    - Isaac 101
 ---
 
 ## 前言
