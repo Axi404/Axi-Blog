@@ -1,0 +1,70 @@
+---
+title: Isaac Sim 一百讲（3）：USD
+publishDate: 2025-01-18
+updatedDate: 2025-01-19
+description: 从零开始的 Isaac Sim 之路，第一季开始！
+heroImage: {src : "thumbnail.webp", color: '#000000' }
+category: 'Tech Talk'
+tags:
+    - 'Tech Talk'
+    - 'Embodied AI'
+    - Isaac 101
+---
+
+import { LinkPreview } from 'astro-pure/advanced'
+
+## 前言
+
+在上一讲中，我们介绍了 Prim 的概念，Isaac Sim 中的一切资产被通过 Prim 以梳状的结构组织起来，并且通过 API 来完成其他属性的赋予。作为新手使用 Isaac Sim 的时候，读者可能常常在创建诸如 Franka 的时候陷入长时间的卡顿，这种由于请求 Isaac Sim 服务器中的资产而陷入的卡顿事实上是一种多余的开销，那么一种想法很自然会出现，如何通过一种更加本地化的方法来管理我的全部资产？USD 是这一切的答案。
+
+## USD
+
+如何理解 USD，可以理解为这就是 Isaac Sim 文件的保存形式，USD 文件和诸如 `.obj` 或者 `.glb` 等内容相似，只不过其管理了更多的内容，包括光照、物理等属性，换句话说，事实上 USD 里保存的就是我们上文提到的 Prim 的结构以及全部的属性信息。
+
+当我们默认创建 Franka 的时候，事实上就是在向服务器请求一个 Franka 的模型文件，以 USD 的形式，并且添加到 stage 中。其中 USD 文件包含二进制以及文字形式的全部信息，USDC 则是二进制形式，USDA 为文本的形式，USDZ 则管理一个压缩包。值得一提的是，在 USD 的家族中，事实上只有 Blender 才可以创建 USDZ 文件，而 Isaac Sim 则只能读取，却只能保存为 USDA/C/_ 的格式，这意味着其中的贴图文件使用默认的绝对路径进行管理，在传输给其他人的时候，也就很容易贴图丢失，打开的内容只剩白模。
+
+## GLB To USD
+
+在读者了解 USD 之前，可能更多听说过的还是以 GLB 为典型的模型资产，而这更主要的原因其实在于，以 Objaverse 为首的大规模模型库都是以 `.glb` 的形式进行保存的。直接通过某种传输的方式，让读者下载本文中提及的模型文件，并且进行进一步的处理（如转为 USD 并添加到场景中）是一件不现实的事情。一方面我们在后续可能会用到很多的资产，而另一方面，我们也很难每次都单独提供这些文件，于是授人以鱼不如授人以渔，我们将首先详解如何获得这些数字资产，并且转换为 USD 文件。
+
+### Objaverse
+
+<LinkPreview href='https://objaverse.allenai.org/' />
+
+Objaverse 是一个包含了 800K 模型资产的 dataset，而更进一步，其升级版本 Objaverse-XL 则包含了 10M 的模型资产，这些内容事实上包含大量的脏资产，如质量较低的扫描物体，或者不常出现在现实中的物体及虚拟物体。清洗的部分并非我们的讲解范围，而部分的其他工作可能公布一些 Objaverse 的 subset，这些 subset 的质量更高，并且可能被加上了更多的标注。
+
+首先可以安装 objaverse：
+
+```bash
+pip install objaverse
+```
+
+并且可以通过以下的代码获得一个模型的路径：
+
+```python
+import objaverse
+print(objaverse.__version__)
+uids = objaverse.load_uids()
+print(len(uids))
+annotations = objaverse.load_annotations(uids)
+random_object_uids = random.sample(uids, 10)
+import multiprocessing
+processes = multiprocessing.cpu_count()
+objects = objaverse.load_objects(
+    uids=random_object_uids,
+    download_processes=processes
+)
+print(objects)
+```
+
+你可以注意到 `objects` 是一个字典，其中的键是 `uid`，而值则是对应的模型的路径，你可以在这个路径下面获得这个模型对应的 `glb` 文件，或者直接使用`shutil`来拷贝：
+
+```python
+import os
+import shutil
+os.makedirs('models', exist_ok=True)
+for uid, path in objects.items():
+    os.makedirs(f'models/{uid}', exist_ok=True)
+    shutil.copy(path, f'models/{uid}.glb')
+```
+
