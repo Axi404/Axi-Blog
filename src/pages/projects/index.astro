@@ -17,9 +17,7 @@ const headings = [
 ---
 
 <PageLayout title='Projects' {headings} info={{ slug: '/projects', hideComment: true }}>
-  <p>
-    如果你觉得我做的项目还不错，可以赞助我，让我有动力继续做下去。
-  </p>
+  <p>如果你觉得我做的项目还不错，可以赞助我，让我有动力继续做下去。</p>
   <Button title='Checkout sponsorship' class='w-fit' href='#sponsorship'>
     <Icon class='size-5' name='receive-money' slot='before' />
   </Button>
@@ -31,24 +29,32 @@ const headings = [
         name: 'CS-BAOYAN-DDL',
         description: 'CCFDDL Like 的保研夏令营/预推免时间汇总',
         links: [
-          { type: 'github', href: 'https://github.com/CS-BAOYAN/CS-BAOYAN-DDL' },
           { type: 'site', href: 'https://cs-baoyan.github.io/CS-BAOYAN-DDL/' },
+          { type: 'github', href: 'https://github.com/CS-BAOYAN/CS-BAOYAN-DDL' }
         ]
       },
       {
         name: '西安交大生存指南',
         description: '西安交大生存指南，关于西安交通大学的学习与生活的系统性指南',
         links: [
-          { type: 'github', href: 'https://github.com/survivexjtu/survivexjtu.github.io' },
           { type: 'site', href: 'https://survivexjtu.github.io/' },
+          { type: 'github', href: 'https://github.com/survivexjtu/survivexjtu.github.io' }
         ]
       },
       {
         name: 'CSWiki',
         description: '一个关于计算机科学保研的相关百科',
         links: [
-          { type: 'github', href: 'https://github.com/CS-BAOYAN/CS-BAOYAN-Wiki' },
           { type: 'site', href: 'https://csbaoyan.top/' },
+          { type: 'github', href: 'https://github.com/CS-BAOYAN/CS-BAOYAN-Wiki' }
+        ]
+      },
+      {
+        name: 'Dress-Collection',
+        description: '我的个人女装展示',
+        links: [
+          { type: 'site', href: 'https://dress.axi404.top/' },
+          { type: 'github', href: 'https://github.com/Axi404/Dress-Collection' }
         ]
       }
     ]}
@@ -78,10 +84,7 @@ const headings = [
     }
   </div>
   <p>感谢这些人投喂的猫粮:</p>
-  <Sponsors
-    sponsors={[
-    ]}
-  />
+  <Sponsors sponsors={[]} />
 </PageLayout>
 
 <script
