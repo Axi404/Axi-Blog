@@ -1,5 +1,5 @@
 ---
-title: Isaac Sim 一百讲（3）：USD
+title: Isaac Sim 一百讲（3）：USD（上）
 publishDate: 2025-01-18
 updatedDate: 2025-01-19
 description: 从零开始的 Isaac Sim 之路，第一季开始！
@@ -68,3 +68,123 @@ for uid, path in objects.items():
     shutil.copy(path, f'models/{uid}.glb')
 ```
 
+### 转换脚本
+
+接下来就是转换的脚本了，这个脚本本身是十分复杂的，但是好在 Isaac Sim 已经给出了实践。你需要安装程序版本的 Isaac Sim，
+
+```bash
+cd /home/$USER/.local/share/ov/pkg/isaac-sim-4.1.0/standalone_examples/api/omni.kit.asset_converter/
+vim asset_usd_converter.py
+```
+
+你就可以看到这个程序的基本实现的版本了，直接指定目录之后执行，即可获得 USD 文件了。在这里同样给出一个我自己稍微改了一些内容的版本，具体就是多了一个传参而已：
+
+```python title="mesh2usd.py"
+import argparse
+import asyncio
+from isaacsim import SimulationApp
+import os
+from pathlib import Path
+from tqdm import tqdm
+
+async def convert(in_file, out_file, load_materials=False):
+    import omni.kit.asset_converter
+
+    def progress_callback(progress, total_steps):
+        pass
+
+    converter_context = omni.kit.asset_converter.AssetConverterContext()
+    converter_context.ignore_materials = not load_materials
+    converter_context.use_meter_as_world_unit = True
+    instance = omni.kit.asset_converter.get_instance()
+    task = instance.create_converter_task(
+        in_file, out_file, progress_callback, converter_context
+    )
+    success = True
+    while True:
+        success = await task.wait_until_finished()
+        if not success:
+            await asyncio.sleep(0.1)
+        else:
+            break
+    return success
+
+
+def asset_convert(args):
+    supported_file_formats = ["glb", "obj", "fbx"]
+    for folder in args.folders:
+        local_asset_output = folder + f"/../{args.dist_folder}"
+        result = omni.client.create_folder(f"{local_asset_output}")
+    for folder in args.folders:
+        print(f"\nConverting folder {folder}...")
+        (result, models) = omni.client.list(folder)
+        for i, entry in tqdm(enumerate(models)):
+            if i >= args.max_models:
+                print(f"max models ({args.max_models}) reached, exiting conversion")
+                break
+            model = str(entry.relative_path)
+            model_name = os.path.splitext(model)[0]
+            model_format = (os.path.splitext(model)[1])[1:]
+            if model_format in supported_file_formats:
+                input_model_path = folder + "/" + model
+                converted_model_path = folder + f"/../{args.dist_folder}/" + model_name + ".usd"
+                if not os.path.exists(converted_model_path):
+                    status = asyncio.get_event_loop().run_until_complete(
+                        convert(input_model_path, converted_model_path, True)
+                    )
+                    if not status:
+                        print(f"ERROR Status is {status}")
+                    print(f"---Added {converted_model_path}")
+
+
+if __name__ == "__main__":
+    kit = SimulationApp()
+    import omni
+    from omni.isaac.core.utils.extensions import enable_extension
+    enable_extension("omni.kit.asset_converter")
+    parser = argparse.ArgumentParser("Convert GLB assets to USD")
+    parser.add_argument(
+        "--folders",
+        type=str,
+        nargs="+",
+        default=None,
+        help="List of folders to convert (space seperated).",
+    )
+    parser.add_argument(
+        "--max-models",
+        type=int,
+        default=50,
+        help="If specified, convert up to `max-models` per folder.",
+    )
+    parser.add_argument(
+        "--load-materials",
+        action="store_true",
+        help="If specified, materials will be loaded from meshes",
+    )
+    parser.add_argument(
+        "--dist-folder",
+        type=str,
+        default="usd",
+        help="If specified, converted assets will be placed in this folder.",
+    )
+    args, unknown_args = parser.parse_known_args()
+    dist_folder = Path(args.dist_folder)
+    dist_folder.mkdir(parents=True, exist_ok=True)
+    if args.folders is not None:
+        asset_convert(args)
+    else:
+        print(f"No folders specified via --folders argument, exiting")
+    kit.close()
+```
+
+在使用的时候可以执行：
+
+```bash
+python mesh2usd.py --folders /mnt/data/assets/objaverse-glb --max-models 1000000 --load-materials --dist-folder objaverse-usd
+```
+
+这里面，就可以创建一个 `/mnt/data/assets/objaverse-usd` 的文件夹，里面包含所有的 USD 文件了。
+
+## 添加 USD
+
+在获得了 USD 之后，我们就可以通过某种方式将这些 USD 文件添加到 Isaac Sim 中，这样我们就不需要再使用一些 CUBE 来作为一个 Demo 的示例了，而是可以真正使用这些模型。
