@@ -1,7 +1,7 @@
 ---
-title: Isaac Sim 一百讲（3）：USD（上）
+title: Isaac Sim 一百讲（3）：USD
 publishDate: 2025-01-18
-updatedDate: 2025-01-21
+updatedDate: 2025-01-23
 description: 从零开始的 Isaac Sim 之路，第一季开始！
 heroImage: {src : "thumbnail.webp", color: '#000000' }
 category: 'Tech Talk'
@@ -188,3 +188,67 @@ python mesh2usd.py --folders /mnt/data/assets/objaverse-glb --max-models 1000000
 ## 添加 USD
 
 在获得了 USD 之后，我们就可以通过某种方式将这些 USD 文件添加到 Isaac Sim 中，这样我们就不需要再使用一些 CUBE 来作为一个 Demo 的示例了，而是可以真正使用这些模型。
+
+在这里，读者需要回忆一下上一章的内容，我们现在已经有了一些 USD 了，我们想要把他们添加到场景里面，这里面自然也就包含了第一个关键要素，也就是，什么是场景。
+
+> 在 Isaac Sim 中，每一次的程序运行会打开某种实例，从意义的角度来说，可以称之为 Scene，也就是一个场景，而从定义上来说，我们剋称之为一个 Stage。
+
+因此，我们需要把物体注册为一个 prim 并且添加到 Stage 中，也就是以下的代码：
+
+```python
+from omni.isaac.core.prims import XFormPrim
+from omni.isaac.core.utils.stage import add_reference_to_stage
+
+def add_usd_to_world(
+    asset_path: str,
+    prim_path: str,
+    name: str,
+    translation: Optional[Sequence[float]] = None,
+    orientation: Optional[Sequence[float]] = None,
+    scale: Optional[Sequence[float]] = None,
+):
+    reference = add_reference_to_stage(usd_path=asset_path, prim_path=prim_path)
+    prim_path = str(reference.GetPrimPath())
+    prim = XFormPrim(
+        prim_path,
+        name=name,
+        translation=translation,
+        orientation=orientation,
+        scale=scale,
+    )
+    usd_prim = prim.prim
+    if not usd_prim.IsValid():
+        print(f"Prim at path {prim_path} is not valid.")
+        return prim
+```
+
+在这里，我们首先通过 `add_reference_to_stage` 来将 USD 添加到 Stage 中，这个函数是 Isaac Sim 的官方函数，直接 `import` 就可以使用。通过输入 USD 的路径，以及指定添加到 Stage 中的 Prim Path，你就可以得到一个物体了。然而需要注意的是，虽然说现在这个物体已经被顺利地添加进来了，但是依然有很多不是很方便的地方，其中比较典型的就是我难以快捷地获得物体的 position 等信息。
+
+事实上，根据之前我们学到的内容，假如说这个物体包含了一个位置信息，那么这个位置信息一定是被保存为了这个 Prim 的一个 Attribute，那么我们就可以通过以下的方式来获得这个位置信息：
+
+```python
+prim.GetAttribute("xformOp:translate").Get()
+prim.GetAttribute("xformOp:orient").Get()
+```
+
+但是这种方法看上去就太繁琐了，本质是在直接和 OpenUSD 的 API 进行交互，而跳过了 Isaac Sim 这一中间层。Isaac Sim 事实上通过一系列的封装，让我们可以更加方便地获得这些信息，并且可以更加方便地进行修改，也就是使用 `XFormPrim`。
+
+就像之前提及的一样，`XFormPrim` 是 Isaac Sim 中对于物体类型的 Prim 的封装，你可以通过 `XFormPrim` 来便捷地进行一些关于物体的操作，比如说平移旋转或者缩放。可以注意到上述的代码中，一共包括若干传参：
+
+```python
+prim_path: str,
+name: str,
+translation: Optional[Sequence[float]] = None,
+orientation: Optional[Sequence[float]] = None,
+scale: Optional[Sequence[float]] = None,
+```
+
+其中，`prim_path` 是这个物体在 Stage 中的路径，这个不难理解；`name` 是这个物体在 Stage 中的名称，和 `prim_path.split("/")[-1]` 保持一致即可；`translation` 是这个物体在 World Frame 中的位置，`orientation` 是这个物体在 World Frame 中的旋转，`scale` 是这个物体相较于原始模型的大小的缩放关系。
+
+其中需要注意的内容是，众所周知四元数是一种表示旋转的方法，而且可以说是目前最常用的表示旋转的方法，Isaac Sim 中的全部旋转也都是用这种方式。四元数相较于欧拉角，可以避免万向锁的问题，并且可以更加方便地进行插值。但是事实上这种表示也分为两种储存的形式，也就是 `scalar_first` 和 `vector_first`，在 Isaac Sim 中，默认使用的是 `scalar_first` 的形式，也就是 `[w, x, y, z]` 的形式，而我们最常使用的旋转库，`scipy.spatial.transform.Rotation` 默认使用的是 `vector_first` 的形式，也就是 `[x, y, z, w]` 的形式。
+
+关于 `XFormPrim` 的更多内容，我们将在后续单独详细介绍。
+
+## 总结
+
+在这一讲中，我们介绍了 USD 的概念，并且介绍了如何通过 objaverse 来获得模型，并且转换为 USD 文件，最后介绍了如何将 USD 文件添加到 Isaac Sim 中，并且进行一些操作。
