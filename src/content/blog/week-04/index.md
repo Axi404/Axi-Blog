@@ -3,7 +3,7 @@ title: 周记 Week4
 publishDate: 2024-07-29
 updatedDate: 2024-07-29
 description: 2024-07-22 ~ 2024-07-28.
-heroImage: {src : "thumbnail.webp", color: '#000000' }
+heroImage: {src : "thumbnail.webp", color: '#CE8F90' }
 category: 'Daily Talk'
 tags:
     - 'Daily Talk'

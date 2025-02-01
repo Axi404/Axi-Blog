@@ -3,7 +3,7 @@ title: 周记 Week16
 publishDate: 2024-10-16
 updatedDate: 2024-10-16
 description: 2024-10-14 ~ 2024-10-20.
-heroImage: {src : "thumbnail.webp", color: '#000000' }
+heroImage: {src : "thumbnail.webp", color: '#6F7879' }
 category: 'Daily Talk'
 tags:
     - 'Daily Talk'

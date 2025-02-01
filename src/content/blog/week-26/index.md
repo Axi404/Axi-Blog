@@ -3,7 +3,7 @@ title: 周记 Week26
 publishDate: 2025-01-01
 updatedDate: 2025-01-01
 description: 2024-12-23 ~ 2024-12-29.
-heroImage: {src : "thumbnail.webp", color: '#000000' }
+heroImage: {src : "thumbnail.webp", color: '#B6816A' }
 category: 'Daily Talk'
 tags:
     - 'Daily Talk'

@@ -3,7 +3,7 @@ title: OpenVLA 代码笔记
 publishDate: 2024-07-23
 updatedDate: 2024-07-23
 description: OpenVLA 纯小白代码阅读记录。
-heroImage: {src : "thumbnail.webp", color: '#000000' }
+heroImage: {src : "thumbnail.webp", color: '#416592' }
 category: 'Code Reading'
 tags:
     - 'Tech Talk'

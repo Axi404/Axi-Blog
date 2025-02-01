@@ -3,7 +3,7 @@ title: 周记 Week5
 publishDate: 2024-07-31
 updatedDate: 2024-07-31
 description: 2024-07-29 ~ 2024-08-04.
-heroImage: {src : "thumbnail.webp", color: '#000000' }
+heroImage: {src : "thumbnail.webp", color: '#D8DAE7' }
 category: 'Daily Talk'
 tags:
     - 'Daily Talk'

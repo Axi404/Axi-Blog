@@ -3,7 +3,7 @@ title: 周记 Week10
 publishDate: 2024-09-09
 updatedDate: 2024-09-09
 description: 2024-09-02 ~ 2024-09-08.
-heroImage: {src : "thumbnail.webp", color: '#000000' }
+heroImage: {src : "thumbnail.webp", color: '#CA3A5D' }
 category: 'Daily Talk'
 tags:
     - 'Daily Talk'

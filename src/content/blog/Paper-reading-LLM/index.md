@@ -3,7 +3,7 @@ title: 'Paper Reading: LLM'
 publishDate: 2024-09-09
 updatedDate: 2024-09-09
 description: 从 BOW 到 GPT，一些 Paper Reading。
-heroImage: {src : "thumbnail.webp", color: '#000000' }
+heroImage: {src : "thumbnail.webp", color: '#40427D' }
 category: 'Paper Reading'
 tags:
     - 'AI Talk'

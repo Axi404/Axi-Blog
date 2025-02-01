@@ -3,7 +3,7 @@ title: 周记 Week3
 publishDate: 2024-07-23
 updatedDate: 2024-07-23
 description: 2024-07-15 ~ 2024-07-21.
-heroImage: {src : "thumbnail.webp", color: '#000000' }
+heroImage: {src : "thumbnail.webp", color: '#415865' }
 category: 'Daily Talk'
 tags:
     - 'Daily Talk'

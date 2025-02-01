@@ -3,7 +3,7 @@ title: 周记 Week6
 publishDate: 2024-08-12
 updatedDate: 2024-08-12
 description: 2024-08-05 ~ 2024-08-11.
-heroImage: {src : "thumbnail.webp", color: '#000000' }
+heroImage: {src : "thumbnail.webp", color: '#E4BD91' }
 category: 'Daily Talk'
 tags:
     - 'Daily Talk'

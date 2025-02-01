@@ -3,7 +3,7 @@ title: 校园 VPN 连接实录
 publishDate: 2024-08-16
 updatedDate: 2024-08-16
 description: EasyConnect + SSH 校外链接服务器。
-heroImage: {src : "thumbnail.webp", color: '#000000' }
+heroImage: {src : "thumbnail.webp", color: '#792F21' }
 category: 'MISCs'
 tags:
     - 'Tech Talk'

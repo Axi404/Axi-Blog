@@ -3,7 +3,7 @@ title: 奇奇怪怪的 CS 小技巧
 publishDate: 2024-09-10
 updatedDate: 2024-09-10
 description: 平时遇到的奇怪 CS 相关小技巧，记录并整理。
-heroImage: {src : "thumbnail.webp", color: '#000000' }
+heroImage: {src : "thumbnail.webp", color: '#718E88' }
 category: 'MISCs'
 tags:
     - 'Tech Talk'

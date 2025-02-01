@@ -3,7 +3,7 @@ title: CUDA & CUDNN & Pytorch 安装
 publishDate: 2024-10-03
 updatedDate: 2024-10-03
 description: 在 Ubuntu 22.04 安装 CUDA & CUDNN & Pytorch。
-heroImage: {src : "thumbnail.webp", color: '#000000' }
+heroImage: {src : "thumbnail.webp", color: '#FADDA1' }
 category: 'MISCs'
 tags:
     - 'Tech Talk'

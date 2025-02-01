@@ -3,7 +3,7 @@ title: 周记 Week15
 publishDate: 2024-10-15
 updatedDate: 2024-10-15
 description: 2024-10-07 ~ 2024-10-13.
-heroImage: {src : "thumbnail.webp", color: '#000000' }
+heroImage: {src : "thumbnail.webp", color: '#87A392' }
 category: 'Daily Talk'
 tags:
     - 'Daily Talk'

@@ -3,7 +3,7 @@ title: EndeavourOS 安装踩坑
 publishDate: 2024-10-04
 updatedDate: 2024-10-04
 description: 品鉴 EndeavourOS 并且进行一些配置。
-heroImage: {src : "thumbnail.webp", color: '#000000' }
+heroImage: {src : "thumbnail.webp", color: '#191F51' }
 category: 'Tech Talk'
 tags:
     - 'Tech Talk'

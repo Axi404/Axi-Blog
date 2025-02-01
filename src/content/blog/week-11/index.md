@@ -3,7 +3,7 @@ title: 周记 Week11
 publishDate: 2024-09-16
 updatedDate: 2024-09-16
 description: 2024-09-09 ~ 2024-09-15.
-heroImage: {src : "thumbnail.webp", color: '#000000' }
+heroImage: {src : "thumbnail.webp", color: '#7A2B1F' }
 category: 'Daily Talk'
 tags:
     - 'Daily Talk'

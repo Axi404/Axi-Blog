@@ -3,7 +3,7 @@ title: 解决 Ubuntu22.04 搜狗输入法无法输出中文
 publishDate: 2024-12-19
 updatedDate: 2024-12-19
 description: 搜狗输入法在正常按照官方指南安装之后无法输出中文，提供了解决方案。
-heroImage: {src : "thumbnail.webp", color: '#000000' }
+heroImage: {src : "thumbnail.webp", color: '#E5DBA1' }
 category: 'MISCs'
 tags:
     - 'Tech Talk'

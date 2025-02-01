@@ -3,7 +3,7 @@ title: 周记 Week12
 publishDate: 2024-10-01
 updatedDate: 2024-10-01
 description: 2024-09-16 ~ 2024-09-22.
-heroImage: {src : "thumbnail.webp", color: '#000000' }
+heroImage: {src : "thumbnail.webp", color: '#474E87' }
 category: 'Daily Talk'
 tags:
     - 'Daily Talk'

@@ -3,7 +3,7 @@ title: 周记 Week1
 publishDate: 2024-07-08
 updatedDate: 2024-07-08
 description: 2024-07-01 ~ 2024-07-07.
-heroImage: {src : "thumbnail.webp", color: '#000000' }
+heroImage: {src : "thumbnail.webp", color: '#E25939' }
 category: 'Daily Talk'
 tags:
     - 'Daily Talk'

@@ -3,7 +3,7 @@ title: 大二回忆录
 publishDate: 2025-01-05   
 updatedDate: 2025-01-05
 description: 我的大二生活。
-heroImage: {src : "thumbnail.webp", color: '#000000' }
+heroImage: {src : "thumbnail.webp", color: '#5773E9' }
 category: 'Daily Talk'
 tags:
     - 'Daily Talk'

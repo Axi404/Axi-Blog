@@ -3,7 +3,7 @@ title: 周记 Week8
 publishDate: 2024-09-01
 updatedDate: 2024-09-01
 description: 2024-08-19 ~ 2024-08-25.
-heroImage: {src : "thumbnail.webp", color: '#000000' }
+heroImage: {src : "thumbnail.webp", color: '#04AAC8' }
 category: 'Daily Talk'
 tags:
     - 'Daily Talk'

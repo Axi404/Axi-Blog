@@ -3,7 +3,7 @@ title: RoboMaster 视觉组第二次培训
 publishDate: 2024-07-17
 updatedDate: 2024-07-17
 description: 关于 SSH 以及 CMake 的基础讲解。
-heroImage: {src : "thumbnail.webp", color: '#000000' }
+heroImage: {src : "thumbnail.webp", color: '#941F18' }
 category: 'Tech Talk'
 tags:
     - 'Tech Talk'

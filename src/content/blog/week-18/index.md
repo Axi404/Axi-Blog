@@ -3,7 +3,7 @@ title: 周记 Week18
 publishDate: 2024-11-05
 updatedDate: 2024-11-05
 description: 2024-10-27 ~ 2024-11-03.
-heroImage: {src : "thumbnail.webp", color: '#000000' }
+heroImage: {src : "thumbnail.webp", color: '#532E14' }
 category: 'Daily Talk'
 tags:
     - 'Daily Talk'

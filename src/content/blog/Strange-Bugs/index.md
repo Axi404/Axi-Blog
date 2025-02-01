@@ -3,7 +3,7 @@ title: 奇奇怪怪的 Bug 集散地
 publishDate: 2024-12-20
 updatedDate: 2024-12-20
 description: 平时遇到的奇怪代码问题，记录并整理。
-heroImage: {src : "thumbnail.webp", color: '#000000' }
+heroImage: {src : "thumbnail.webp", color: '#AB8187' }
 category: 'MISCs'
 tags:
     - 'Tech Talk'

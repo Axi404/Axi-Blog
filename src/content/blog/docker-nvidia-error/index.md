@@ -3,7 +3,7 @@ title: Docker 调用 Nvidia 报错
 publishDate: 2025-01-12
 updatedDate: 2025-01-12
 description: '正常安装 Nvidia Docker 后运行时报错 Failed to initialize NVML: Unknown Error。'
-heroImage: {src : "thumbnail.webp", color: '#000000' }
+heroImage: {src : "thumbnail.webp", color: '#6461B2' }
 category: 'Tech Talk'
 tags:
     - 'Tech Talk'

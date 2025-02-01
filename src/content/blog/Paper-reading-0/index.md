@@ -3,7 +3,7 @@ title: Paper Reading 0
 publishDate: 2024-09-09
 updatedDate: 2024-09-09
 description: 在方向中探索之前，更加基础的一些内容，课程/书籍推荐以及基础论文阅读。
-heroImage: {src : "thumbnail.webp", color: '#000000' }
+heroImage: {src : "thumbnail.webp", color: '#3278CE' }
 category: 'Paper Reading'
 tags:
     - 'AI Talk'

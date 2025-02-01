@@ -3,7 +3,7 @@ title: Isaac Sim 踩坑日记
 publishDate: 2024-08-19
 updatedDate: 2025-01-18
 description: 关于 Isaac Sim，注定还有一段漫长的路。
-heroImage: {src : "thumbnail.webp", color: '#000000' }
+heroImage: {src : "thumbnail.webp", color: '#D70157' }
 category: 'Tech Talk'
 tags:
     - 'Tech Talk'

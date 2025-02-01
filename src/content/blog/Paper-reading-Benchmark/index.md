@@ -3,7 +3,7 @@ title: 'Paper Reading: Benchmark'
 publishDate: 2024-09-14
 updatedDate: 2024-09-14
 description: 一些和 Benchmark 相关的论文阅读。
-heroImage: {src : "thumbnail.webp", color: '#000000' }
+heroImage: {src : "thumbnail.webp", color: '#654BA8' }
 category: 'Paper Reading'
 tags:
     - 'AI Talk'

@@ -3,7 +3,7 @@ title: "Github Actions and Pages 教程"
 publishDate: 2024-07-02
 updatedDate: 2024-07-02
 description: 关于 Actions 与 Pages 的教程，暨 CSBAOYANDDL 技术分享。
-heroImage: {src : "thumbnail.webp", color: '#000000' }
+heroImage: {src : "thumbnail.webp", color: '#865A52' }
 category: 'Tech Talk'
 tags:
     - 'Tech Talk'

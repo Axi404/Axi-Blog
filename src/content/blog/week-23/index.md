@@ -3,7 +3,7 @@ title: 周记 Week23
 publishDate: 2024-12-14
 updatedDate: 2024-12-14
 description: 2024-12-02 ~ 2024-12-08.
-heroImage: {src : "thumbnail.webp", color: '#000000' }
+heroImage: {src : "thumbnail.webp", color: '#325DA2' }
 category: 'Daily Talk'
 tags:
     - 'Daily Talk'

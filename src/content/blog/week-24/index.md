@@ -3,7 +3,7 @@ title: 周记 Week24
 publishDate: 2024-12-16
 updatedDate: 2024-12-16
 description: 2024-12-09 ~ 2024-12-15.
-heroImage: {src : "thumbnail.webp", color: '#000000' }
+heroImage: {src : "thumbnail.webp", color: '#673C2B' }
 category: 'Daily Talk'
 tags:
     - 'Daily Talk'

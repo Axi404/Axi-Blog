@@ -3,7 +3,7 @@ title: 周记 Week13
 publishDate: 2024-10-02
 updatedDate: 2024-10-02
 description: 2024-09-23 ~ 2024-09-29.
-heroImage: {src : "thumbnail.webp", color: '#000000' }
+heroImage: {src : "thumbnail.webp", color: '#92342D' }
 category: 'Daily Talk'
 tags:
     - 'Daily Talk'

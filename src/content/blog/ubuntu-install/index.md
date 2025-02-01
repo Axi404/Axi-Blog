@@ -3,7 +3,7 @@ title: Ubuntu 22.04 三系统安装以及安装显卡驱动后无线网卡恢复
 publishDate: 2024-12-19
 updatedDate: 2024-12-19
 description: 在已有 Ubuntu 20.04 以及 Windows 的时候安装 Ubuntu 22.04 双系统并且修复一些 Bugs。
-heroImage: {src : "thumbnail.webp", color: '#000000' }
+heroImage: {src : "thumbnail.webp", color: '#76B2B7' }
 category: 'MISCs'
 tags:
     - 'Tech Talk'

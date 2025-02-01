@@ -3,7 +3,7 @@ title: Git 的常见操作
 publishDate: 2024-07-03
 updatedDate: 2024-07-03
 description: 日常使用的 Git 操作，丝滑小连招。
-heroImage: {src : "thumbnail.webp", color: '#000000' }
+heroImage: {src : "thumbnail.webp", color: '#FDFFDD' }
 category: 'Tech Talk'
 tags:
     - 'Tech Talk'

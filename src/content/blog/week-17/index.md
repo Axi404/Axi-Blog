@@ -3,7 +3,7 @@ title: 周记 Week17
 publishDate: 2024-11-05
 updatedDate: 2024-11-05
 description: 2024-10-21 ~ 2024-10-27.
-heroImage: {src : "thumbnail.webp", color: '#000000' }
+heroImage: {src : "thumbnail.webp", color: '#FCF4F0' }
 category: 'Daily Talk'
 tags:
     - 'Daily Talk'

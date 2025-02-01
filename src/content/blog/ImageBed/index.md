@@ -3,7 +3,7 @@ title: 一种优化后的免费图床解决方案
 publishDate: 2024-08-25
 updatedDate: 2024-08-25
 description: 仅需域名，无限空间，无限流量，国内快速访问，基于 vercel/PicX/webp。
-heroImage: {src : "thumbnail.webp", color: '#000000' }
+heroImage: {src : "thumbnail.webp", color: '#585E8C' }
 category: 'MISCs'
 tags:
     - 'Tech Talk'

@@ -3,7 +3,7 @@ title: 大一回忆录
 publishDate: 2024-10-03
 updatedDate: 2024-10-03
 description: 我的大一生活。
-heroImage: {src : "thumbnail.webp", color: '#000000' }
+heroImage: {src : "thumbnail.webp", color: '#A5CBEE' }
 category: 'Daily Talk'
 tags:
     - 'Daily Talk'

@@ -3,7 +3,7 @@ title: RoboMaster 回忆录
 publishDate: 2024-08-03
 updatedDate: 2024-08-03
 description: 我的 RM 故事。
-heroImage: {src : "thumbnail.webp", color: '#000000' }
+heroImage: {src : "thumbnail.webp", color: '#7A7EAA' }
 category: 'Daily Talk'
 tags:
     - 'Daily Talk'

@@ -3,7 +3,7 @@ title: 周记 Week22
 publishDate: 2024-12-06
 updatedDate: 2024-12-06
 description: 2024-11-25 ~ 2024-12-01.
-heroImage: {src : "thumbnail.webp", color: '#000000' }
+heroImage: {src : "thumbnail.webp", color: '#1F4297' }
 category: 'Daily Talk'
 tags:
     - 'Daily Talk'
