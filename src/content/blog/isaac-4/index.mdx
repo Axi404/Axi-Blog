@@ -1,0 +1,129 @@
+---
+title: Isaac Sim 一百讲（4）：Transformation
+publishDate: 2025-02-02
+updatedDate: 2025-02-02
+description: 从零开始的 Isaac Sim 之路，第一季开始！
+heroImage: {src : "thumbnail.webp", color: '#3E819A' }
+category: 'Tech Talk'
+tags:
+    - 'Tech Talk'
+    - 'Embodied AI'
+    - Isaac 101
+---
+
+import { LinkPreview } from 'astro-pure/advanced'
+
+## 前言
+
+在上一章中，我们学习了如何创建一个 USD 并且将这个 USD 放到一个 Stage 中，这些操作使得我们可以成功在一个场景中引入我们的资产，然而这只是开始，事实上我们还需要更多。这一章中，我们将会回顾那些基础的知识，带领对这个领域一无所知的读者了解三维刚体的空间变化的最基础表示，并且使用 Isaac Sim 提供的封装来操作物体进行移动。
+
+## 三维刚体的空间表示
+
+让我们想象一个在空间中的长方形（因为圆形和正方形在空间中的旋转可能有歧义性，还是长方形好一些），作为这个世界中的全知者，你知道这个空间中的一切信息，但是你想要使用最少的信息来将这个物体每一个时刻的全部物理信息（即不包括颜色等渲染用到的光照信息）告诉我，请问应该怎么做？
+
+让我们给出一个假设，也是一个经典的假设，即，这个物体是一个刚体。换句话来说，这个物体在空间中不会因为任何的力的作用而产生任何的形变，这使得我们可以简单地将这个物体拆分成两个部分，一个是物体的形状信息，一个是物体的位置信息。
+
+事实上，前者在 Isaac Sim 里面通常以 Prim 进行表示，并且以 Mesh 的方式进行储存，即一些通过一系列的点，以及一些多元组表示的面组成的信息。
+
+作为一个例子，在大多数的 Mesh 中，面均以三角形存储，如一个 Mesh 可以被表示为 `[(0, 0, 0), (1, 1, 0), (1, 1, 1)]` 以及 `[(0, 1, 2)]` 来表示，前者表示这个 Mesh 的三个顶点在空间中的坐标，而后者则表示仅存在一个面，这个面由序号 0, 1, 2 的三个顶点组成。
+
+而后者则可以通过两个变量来组成，即 position 和 orientation。
+
+### 平移
+
+让我们思考最为简单的情况，一个物体在一个标准的右手坐标系下平移。我们可以任选物体上的任意一个点，作为物体的原点，换句话说，我们认为这个物体上的点始终代表着某个坐标系的 $(0, 0, 0)$ 的位置。在长方形的例子中，我们不妨选择长方形的质心，同时任选两个方向作为坐标系的 X, Y 轴方向，以获得进一步的 XYZ 轴信息，在这里不妨让 X 轴与长方形的长边平行，而 Y 轴与宽边平行，从而不难求出 Z 应该与高边平行。我们称这个坐标系为物体坐标系。
+
+因为已知这个物体是刚体，所以说这个物体不会发生任何的形变，在物体平移的过程中，随着物体向右 1m，物体上的每一个点都会向右 1m，这其中当然也包括物体坐标系的原点。而最有趣的点在于，这一切反过来的时候，我们知道物体坐标系的原点向右了 1m，我们就知道了物体上的每一个点都向右了 1m，这件事情是等价的，而因为我们已经事先知道了在向右 1m 之前的物体的全部几何形状（即 Mesh 信息），我们也就知道了其初始的每一个点的信息，那么求出向右 1m 后的每一个点的信息自然也就不难了。
+
+因此我们发现，物体的平移，完全可以通过物体坐标系的原点的坐标平滑来表示，或者说，物体的平移与物体坐标系的平移包含相同的信息，从表达的含义上来说它们是等价的。
+
+### 旋转
+
+通过相似的思路，我们不难得到物体的旋转和物体坐标系的旋转的等价关系，比如说物体绕 Z 轴顺时针旋转了 45 度，其长边和短边也就旋转了 45 度，则 XY 轴旋转了 45 度，反过来亦然。这个显然的道理在这里不再赘述，假如有读者无法理解，可以留言，将来我会进行更多的阐释。
+
+事实上在旋转这一话题上，我们要讨论的是另一种内容，即旋转的表示方式。平移是很好理解的，其本身就是对于点的加减法，然而旋转更多地是一种数学上的表述，其存在直观的表示方式，以及数学的运算方式，而这二者并不是同一种表示。
+
+假设我们表述一种混乱的变换，某个物体的旋转是这样的过程：
+
+```python
+for i in range(1000):
+    axis = random.choice(["X", "Y", "Z"])
+    angle = random.randint(0,359)
+    print(f"物体绕 {axis} 轴旋转了 {angle} 度")
+```
+
+这意味着一种最为简单粗暴的方式是，我们记录下来这一千次的轴以及度数，并且组成一个 List，即 `[{"axis": str, "angle": int/float}]`，这是一种最为基础的表述，然而并不足够简洁。
+
+假如读者尚且对于线性代数的知识有所印象，在线性代数中讲解过旋转矩阵的概念，即某一点 $\begin{bmatrix}x \\y\end{bmatrix}$，可以使用 $\begin{bmatrix}x \\y\end{bmatrix}^\prime=\begin{bmatrix}\cos{\theta} & -\sin{\theta}\\\sin{\theta}&\cos{\theta}\end{bmatrix}$ 来计算其绕原点逆时针旋转（在旋转中，除非特殊说明，否则我们认为逆时针为正方向，不在阐述）$\theta$度之后的坐标，而假如将其换到三维坐标系下，岂不就是绕着 Z 轴进行旋转？
+
+因此我们不难给出绕 Z 轴旋转的角度的旋转矩阵，即 $\mathbf{R}_z (\alpha) = \begin{bmatrix}\cos\alpha & -\sin\alpha & 0 \\\sin\alpha & \cos\alpha & 0 \\0 & 0 & 1\end{bmatrix}$，而这个角度我们通常可以记为翻滚角 roll。同理我们不难给出绕 XY 轴的旋转对应的旋转矩阵，即$\mathbf{R}_x (\gamma) = \begin{bmatrix}1 & 0 & 0 \\0 & \cos\gamma & -\sin\gamma \\0 & \sin\gamma & \cos\gamma\end{bmatrix}$ 以及 $\mathbf{R}_y (\beta) = \begin{bmatrix}\cos\beta & 0 & \sin\beta \\0 & 1 & 0 \\-\sin\beta & 0 & \cos\beta\end{bmatrix}$，这两个角度记为俯仰角 Pitch 以及偏航角 Yaw。
+
+因此我们不难得到，我们上述提到的一系列旋转，最终可以用一系列的$3\times 3$的矩阵的连续乘积，即最后得到一个$3\times 3$的矩阵表示，这个矩阵可以表示任意的旋转，称之为旋转矩阵 $R$。关于旋转矩阵的若干性质不过多介绍。
+
+然而旋转矩阵具有过于冗余的参数，实际上旋转只有三个自由度（绕 XYZ 轴旋转），而旋转矩阵使用了 9 个参数。其他的角度的表示还包括欧拉角（具有万向锁）、轴角（自由度冗余），以及最为合理且广泛应用的角度表示，四元数。无它，四元数支持更加合理的插值。关于这些旋转的表示在此不进行过度的介绍，或许将来关于计算机视觉或者机器人学的内容会专门开一个篇章进行详细的介绍。
+
+四元数，即 $\begin{bmatrix}w&x&y&z\end{bmatrix}$，也可以表示为$\begin{bmatrix}x&y&z&w\end{bmatrix}$，前者的表示被称为 scalar-first，而后者则是 scalar-last，这两种方式均可以，因为只是排列的顺序改变，在数学含义上均为 $\mathbf{q}=w+xi+yj+zk$，然而在编程中需要注意这二者的区别，毕竟其使用一个维度为 4 的 `np.darray` 表示，假如传参错误，就很可能导致错误的结果。
+
+### 简要介绍 scipy
+
+在这里简要介绍一下 scipy，scipy 是 python 的一个科学计算库，我们在编程的过程中会使用其中的 `R`，即 `from scipy.spatial.transform import Rotation as R` 来进行角度的运算。其语法十分简单，一个是 `from_xxx`，以及另一个是 `as_xxx`，如我们想要把一个旋转矩阵变量 `matrix` 转为四元数，我们可以直接使用 `R.from_matrix(matrix).as_quat()` 来获得。
+
+类似的语法的一个示例：
+
+```python
+import numpy as np
+from scipy.spatial.transform import Rotation as R
+
+quaternion = [0, 0, np.sin(np.pi/4), np.cos(np.pi/4)]
+# 使用四元数创建一个 Rotation 对象
+rotation = R.from_quat(quaternion)
+# 获取欧拉角（以弧度为单位）
+euler_angles = rotation.as_euler('xyz', degrees=False)
+# 获取欧拉角（以度数为单位）
+euler_angles_degrees = rotation.as_euler('xyz', degrees=True)
+# 获取旋转矩阵
+rotation_matrix = rotation.as_matrix()
+# 获取旋转向量
+rotation_vector = rotation.as_rotvec()
+```
+
+不难发现，其中 euler，即欧拉角，可以选择轴的顺序（XYZ 即输入的长度为 3 的 `np.darray` 依次为 XYZ 轴旋转的角度，且按照 XYZ 的顺序进行旋转），而 degrees 则表示是否使用角度，其他的都不难看懂。
+
+需要十分注意的一点是，scipy 的四元数默认使用的是 scalar_last 的表示，而这与绝大多数的 robotics 相关的库使用的 scalar_first 相悖，一些版本的 scipy 传参支持 `scalar_first=True` 的传参，然而为了兼容性，我们推荐使用 `[[1, 2, 3, 0]]` 以及 `[[3,  0, 1, 2]]` 的方式进行转换。这一示例将在后续给出。
+
+
+## World Frame 与 Local Frame
+
+通过上述的内容，相信读者事实上已经具备了关于坐标系的概念，并且任何一个坐标系都可以通过关于另一个坐标系的平移和旋转来表示。事实上这种通过相对关系来进行的表示并不方便，我们不希望坐标系依赖于某个物体，而是存在一个绝对的基准，我们只维护不同坐标系相对于这个绝对的基准的变换关系，而当我们想要求任意两个坐标系之间的变换，我们则使用这个基准来进行中转，使用 $R_1^T\cdot R_2$ 来求出两个坐标系之间的变换。
+
+这种想法是合理的，因此我们给出定义，World Frame，译为世界坐标系，是某个绝对的静止的坐标系（当然，假如一切发生在一辆行驶的车上，车的地板的某一处也可以是世界坐标系的原点，毕竟静止是相对的）。在 Isaac Sim 中，我们认为 Root，即 `get_prim_at_path("/")` 所获得的 Prim 表示的坐标系为世界坐标系。
+
+同时，我们也存在另一种需求，诸如我们想要将一个 Camera 和 Franka hand 进行固连，即让 Camera 随着 Franka hand 而运动，似乎我们只能定义一个 Camera 相对于 Franka hand 的变换，从而使得这个变换为固定值。在绝大多数的三维资产管理中，事实上我们均使用 Local Frame 下的变换来维护资产，即某个 node 相较于其 parent 的变换，因此在 Prim 的树中来看，我们只需要将 Camera 放置在 Franka hand 的 prim_path 下方，就可以确保 franka hand 在变换的过程中使得 Camera 一起变换。
+
+因此在计算 World Frame 的变换的过程中，事实上是通过链式进行传播，将若干 Local Frame 的变换组合在一起而得到的。
+
+## Isaac Sim 的 API
+
+事实上，我们不难想起在第三讲中介绍的，Isaac Sim 关于 Prim 存在一个管理平移和旋转的 attribute，其中保存的正是 Prim 在 Local Frame 下的变换，然而我们在这里先不进行这一部分的过多展开，本篇内容在一开始已经加入了让没有接触的读者感到比较硬核的内容了，因此这一章中的编程部分会尽可能地简化，而不是继续复杂下去。
+
+毕竟事实上，假如说我们时时刻刻都是使用 Prim 的 attribute 进行操作，也就成为了彻底在使用 OpenUSD 进行编程了，Isaac Sim 在提供了仿真平台的同时，大概还是给出了一些比较不错的接口的，即之前事实上提到过的，Isaac Sim XFormPrim。在这里给出程序示例：
+
+```python
+from omni.isaac.core.prims import XFormPrim
+from scipy.spatial.transform import Rotation as R
+
+object_xform = XFormPrim("/World/object")
+position, orientation = object_xform.get_world_pose()
+position[2] += 2.0
+orientation_R = R.from_quat(orientation[[1, 2, 3, 0]]) * R.from_euler("xyz", np.array([90,0,0]), degrees=True)
+orientation = orientation_R.as_quat()[[3, 0, 1, 2]]
+object_xform.set_world_pose(position=position, orientation=orientation)
+```
+
+不难理解，我们可以通过 `get_world_pose()` 来获得 `position` 以及 `orientation`，而同时可以通过 `set_world_pose()` 来设置。值得一提的是，同样的 API 包括 `set/get_local_pose()`，其用法相同，而 `set_local_pose()` 的传参为 `translation` 以及 `orientation` 而非 `position`。
+
+同时，需要注意的一点在于，事实上 set_world_pose 是通过改变 local frame 下的变换以实现的，毕竟如果改变 parent 的 local frame 的变换，会影响其他 prim，而如何只改变其 child，则需要一个个都施加相同的变换，不如直接一步修改 local frame。
+
+## 总结
+
+本讲内容主要普及介绍了三维刚体变换相关的内容，并且讲解了 Isaac Sim 中如何使用 XFormPrim 来进行变换。作为一个实践，读者可以使用第三讲中的素材尝试改变其世界系下的坐标，而进一步的拓展，读者可以思考，如何使用 OpenUSD 的 API 求出任意两个 Prim 之间的变换。
