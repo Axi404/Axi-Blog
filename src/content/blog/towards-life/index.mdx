@@ -1,7 +1,7 @@
 ---
 title: 步入新的生活
 publishDate: 2025-02-02
-updatedDate: 2025-02-02
+updatedDate: 2025-02-05
 description: 打算接触 VRChat，成为更美好的二次元游民。
 heroImage: {src : "thumbnail.webp", color: '#D75B51' }
 category: 'Daily Talk'
@@ -47,6 +47,81 @@ VRChat 还是需要比较多的设备的，本身这个软件是可以使用 PC 
 | 总计 | | | 11303 |
 
 目前我已经买了 Quest 3，但是过一段时间就要开学了，自然不会买动捕相关的内容，这些等到了上海的新宿舍之后再说。
+
+
+## 初步配置
+
+设备到货之后需要进行一套初步的配置。先总结一下我的需求，然后再来看应该如何操作。我使用 Quest3 说白了只有一个需求，就是串流的需求，我并不是很喜欢大多数的 VR 游戏，所以 Quest3 一体机的效果我并不会很充分的使用，无论是办公还是游玩 VRChat，使用电脑进行串流都可以获得最优的体验。
+
+我的需求大概如下：
+
+- Quest3 安装最新的版本。
+- 使用 Virtual Desktop 进行串流。
+- 支持安装自己的 apk 文件。
+
+在这里推荐 B 站 UP 主南七月的教程，此处给出其[文档链接](https://www.yuque.com/nanqiyuenqy/afismy)。以下是我个人按照南七月教程的一些实践。
+
+### 验机
+
+首先到货之后肯定是要先验机，也就是看是不是有什么损坏之类的，Quest3 的左下角有一个电源键，长按可以关机，关机之后充电，就可以获得一个发光的纯黑背景，可以看是否有坏点，一般来说都没有，我这边也没有出现问题。
+
+### 初始化与更新
+
+首先先进行基础的配置，选择了语言之类的选项，然后开始连接 WiFi。
+
+Quest3 不同于其他设备，因为是 Meta 的设备，所以说在国内需要使用加速器等才可以登入。在一开始没有必要做其他事情，选完语言之后就直接，此处使用 ~~UU 加速器~~直接代理了路由器，然后在 Netch 中设置配置为 `[2][pcap2socks]Tencent(10.6.0.1)Preset`，在 Quest3 连接中将 IP 设置改为 `静态`，并且使用 `10.6.0.1` 作为 IP 地址，`10.6.0.2` 作为网关，网络前缀使用 24，DNS 1 为 `8.8.8.8`，这样就可以使用 Netch 来使用 UU 加速器了。不过多介绍。
+
+然后该怎么选怎么选，Quest3 会开始更新最新版本，因为我的网络不太好，这个过程持续了一个多小时。
+
+### 注册账号并且申请开发者资格
+
+直接在手机上，进入 IOS 美区，然后下载 Meta Horizon 的应用，使用**邮箱注册账号**（据说别的容易封号），在手机页面找了一下，发现了可以绑定 Quest3，绑定了一下，结束，可以申请开发者资格了。
+
+之所以要申请开发者资格，是因为可以安装 SideQuest 这个软件，这个软件可以使用 adb 来安装一些非官网的 apk 文件。
+
+具体来说，需要进入[开发者的界面](https://developers.meta.com/horizon/documentation/native/android/mobile-device-setup/)，登录，点击头像并且选择 My Preference，然后设置一下 2FA。因为我之前要用实验室的 2FA 以及 Github，所以说这个软件一直都有，直接扫码进去了。
+
+绑上 2FA 之后就可以继续申请，直接选择申请，然后一路继续，就结束了，还是很简单的。之后去手机 APP 的 Headset Setting 里开一下 Developer Mode 就好了。
+
+后来发现这个也有南七月的教程，在[这里](https://www.yuque.com/nanqiyuenqy/afismy/mf2k1a9gu7lv7r2y)。
+
+### 安装软件
+
+安装软件的话，首先需要安装一个叫做 Virtual Desktop 的软件，这个软件是用来进行串流的，具体来说就是将你的电脑的画面投射到 Quest3 上。这一部分直接在应用商店里面安装就好，顺手的事情。因为 Netch 实在打开一次太麻烦，所以说干脆全部的事情都在这一次里面解决掉。该下载的下载，该更新的更新，然后结束。
+
+之后的另一个配置是安装 SideQuest，这部分直接进入[官网](https://sidequestvr.com/)，选择 Get SideQuest，然后 Web Installer，用 USB 线连接电脑和 Quest3，然后下载安装，结束。
+
+![](https://pic.axi404.top/image.13lw2bqtgg.webp)
+
+之后下载一个客户端，安装。本身应该选择客户端里面的安装 apk 就可以了，但是在一些情况下会卡在 `Checking APK against blacklist...`，因为 SideQuest 自己有黑名单，所以需要使用 `adb install` 来安装。直接点击：
+
+![](https://pic.axi404.top/image.4ub1nkihpc.webp)
+
+就可以自己执行安装了，使用 `adb install <path_to_apk>` 就可以了，这里的路径是电脑的。
+
+需要注意的是，可能会报错，主要原因是因为软件是 x86 的，而 Quest3 是 ARM 的，需要注意一下。
+
+## Virtual Desktop 配置
+
+Virtual Desptop 也需要一些配置，在这里给出电脑以及 VR 的部分。
+
+在电脑上打开 [Virtual Desktop 官网](https://www.vrdesktop.net/) 下载 Windows 客户端，安装之后打开，这里面出现了几个 Issue，需要处理一下。
+
+![](https://pic.axi404.top/image.1ap3xrnpru.webp)
+
+前两个按照说明来就好，第一个在 GeForce Experience 中设置，依次选择，然后关闭。第二个在设置里面，`网络和Internet->WLAN->管理已知网络`，然后选择你正在连接的路由器，在网络配置文件类型里面选择专用网络。
+
+最后这个是 killer 程序的问题，这个是一个经典问题，在卸载里面你会发现找不到这个程序，但是事实上是存在的，需要用一个软件来杀，见 [killer_software_uninstaller](https://www.majorgeeks.com/files/details/killer_software_uninstaller.html)，启动之后卸载就好。
+
+此时只要电脑和 VR 在一个网络下面，就可以进行串流了。
+
+## VRChat 注册账号
+
+VRChat 需要注册一个账号，同时因为后续我需要上传模型，所以需要一定的信任等级。
+
+账号本身直接前往[官网](https://hello.vrchat.com/)，使用邮箱注册账号，但是因为网络问题，可能会出问题。这个时候可以去一个一个换 UU 加速器的服务器，记得是路由模式的，总有一个可以。而且从经验上来说，你可以去类似的教学视频下面看，会有人分享自己在哪个服务器上成功了，选择相同的服务器，成功概率很大。
+
+之后我是因为很急，直接充值了 VRC+，这样可以快速提升信任等级，这个可以直接用 Steam 支付，然后玩了几个小时，用公模去了新手房，等级就够了。之后就可以上传模型了。
 
 ## 模型编辑
 
@@ -142,3 +217,4 @@ VRChat 的模型编辑是基于 Unity 的，所以如果你有 Unity 的开发�
         </figcaption>
     </figure>
 </div>
+
