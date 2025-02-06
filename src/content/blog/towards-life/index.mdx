@@ -125,21 +125,29 @@ VRChat 需要注册一个账号，同时因为后续我需要上传模型，所�
 
 ## 模型编辑
 
-VRChat 的模型编辑是基于 Unity 的，所以如果你有 Unity 的开发经验，那么上手会非常快，但是显然我还没有。对于我来说，一个初步的策略是在闲鱼购买成品模型，先进行一些游玩，但是模型编辑必然是一个必备技能，在后续进行进一步的探索。
+VRChat 的模型编辑是基于 Unity 的，所以如果你有 Unity 的开发经验，那么上手会非常快，但是显然我还没有。
 
 事实上，因为我至少要大四才会正式入坑，因为到时候我才可以有地方放我的动捕设备，在此之前获取我还有大量的时间学习模型相关的内容，等到我正式入坑的时候，或许我已经具备了相关的技能。
-
-在观察了别人的模型之后，我发现，对于我来说的一个最好的模型会具有以下的特点：
 
 以下是一些我搜集到的我或许会用到的内容：
 
 - **[Unity](https://unity.com/)**：VRChat 的模型编辑是基于 Unity 的。
+- **[VCC](https://vcc.docs.vrchat.com/)**：VRChat 的模型编辑器。
 - **[VRChat](https://hello.vrchat.com/)**：VRChat 的官网。
 - **[Modular Avatar](https://modular-avatar.nadena.dev/)**：自动绑定衣物。
 - **[VRCFury](https://vrcfury.com/)**：提供 SPS 的功能。
 - **[lilToon](https://booth.pm/ja/items/3087170)**：二次元的着色器，提供渲染效果。
 - **[RealKissSystem](https://booth.pm/en/items/5354575)**：支持与拥有相同插件的人提供亲吻动画。
-- **[Selestia Phys Bone Setting](https://booth.pm/ja/items/4111458)**：Selestia 的物理骨骼设置。
+
+在经过搜索了一些资料之后，我理解了宏观的逻辑。
+
+### 宏观逻辑
+
+本身，VRChat 我们只考虑编辑人物模型而不考虑编辑场景模型。VRChat 的人物本身可以理解为使用 Unity 开发的一个 Object，其中包括了若干的 script，这些 script 可以使用 VRChat 的插件来进行解析，表述其在 VRChat 中的行为，并可以在 Unity 中进行编辑。VCC 是一个 Unity 启动器，或者其实很像一些创意工坊类型的游戏的 Mod 管理器。现在的大多数插件都支持直接通过 VCC 导入，也就是通过一个链接，直接打开 VCC，并且下载这个插件。之后在一个项目中，只需要勾选或者取消勾选这个插件，也就可以实现插件的添加与删除了。
+
+VCC 提供了若干基础的 SDK，可以支持使用者将模型上传，以及
+
+## 素材整理
 
 我目前初步打算使用 [Selestia](https://jingo1016.booth.pm/items/4035411) 作为我的素体，因为相关的衣服的适配确实是偏多的。
 
