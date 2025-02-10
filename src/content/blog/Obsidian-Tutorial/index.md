@@ -5,6 +5,7 @@ updatedDate: 2024-07-06
 description: Obsidian 快速上手，概念辨析 & 基础使用。
 heroImage: {src : "thumbnail.webp", color: '#432826' }
 category: 'Tech Talk'
+language: '中文'
 tags:
     - 'Tech Talk'
     - Obsidian

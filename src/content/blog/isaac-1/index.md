@@ -5,6 +5,7 @@ updatedDate: 2025-01-19
 description: 从零开始的 Isaac Sim 之路，第一季开始！
 heroImage: {src : "thumbnail.webp", color: '#808497' }
 category: 'Tech Talk'
+language: '中文'
 tags:
     - 'Tech Talk'
     - 'Embodied AI'

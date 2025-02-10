@@ -5,6 +5,7 @@ updatedDate: 2024-07-10
 description: 关于 C++ 的快速入门以及基础概念讲解。
 heroImage: {src : "thumbnail.webp", color: '#7AABE6' }
 category: 'Tech Talk'
+language: '中文'
 tags:
     - 'Tech Talk'
     - RoboMaster

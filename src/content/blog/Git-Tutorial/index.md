@@ -5,6 +5,7 @@ updatedDate: 2024-07-03
 description: 日常使用的 Git 操作，丝滑小连招。
 heroImage: {src : "thumbnail.webp", color: '#FDFFDD' }
 category: 'Tech Talk'
+language: '中文'
 tags:
     - 'Tech Talk'
     - 'Git'

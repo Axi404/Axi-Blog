@@ -5,6 +5,7 @@ updatedDate: 2024-08-16
 description: EasyConnect + SSH 校外链接服务器。
 heroImage: {src : "thumbnail.webp", color: '#792F21' }
 category: 'MISCs'
+language: '中文'
 tags:
     - 'Tech Talk'
     - VPN

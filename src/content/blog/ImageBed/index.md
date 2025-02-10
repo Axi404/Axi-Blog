@@ -5,6 +5,7 @@ updatedDate: 2024-08-25
 description: 仅需域名，无限空间，无限流量，国内快速访问，基于 vercel/PicX/webp。
 heroImage: {src : "thumbnail.webp", color: '#585E8C' }
 category: 'MISCs'
+language: '中文'
 tags:
     - 'Tech Talk'
     - 'Image Hosting'

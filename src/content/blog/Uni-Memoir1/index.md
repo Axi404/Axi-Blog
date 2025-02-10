@@ -5,6 +5,7 @@ updatedDate: 2024-10-03
 description: 我的大一生活。
 heroImage: {src : "thumbnail.webp", color: '#A5CBEE' }
 category: 'Daily Talk'
+language: '中文'
 tags:
     - 'Daily Talk'
     - University

@@ -5,6 +5,7 @@ updatedDate: 2024-07-17
 description: 关于 SSH 以及 CMake 的基础讲解。
 heroImage: {src : "thumbnail.webp", color: '#941F18' }
 category: 'Tech Talk'
+language: '中文'
 tags:
     - 'Tech Talk'
     - RoboMaster

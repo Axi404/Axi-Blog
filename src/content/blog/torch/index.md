@@ -5,6 +5,7 @@ updatedDate: 2024-10-03
 description: 在 Ubuntu 22.04 安装 CUDA & CUDNN & Pytorch。
 heroImage: {src : "thumbnail.webp", color: '#FADDA1' }
 category: 'MISCs'
+language: '中文'
 tags:
     - 'Tech Talk'
     - Bug Report
