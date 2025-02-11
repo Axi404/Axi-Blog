@@ -1,7 +1,7 @@
 ---
 title: 一些常用的指令
 publishDate: 2025-02-01
-updatedDate: 2025-02-02
+updatedDate: 2025-02-12
 description: 因为一些指令比较常见，所以写一篇博客记录一下，以在将来方便同步。
 heroImage: {src : "thumbnail.webp", color: '#E29CEE' }
 category: 'Tech Talk'
@@ -70,6 +70,16 @@ sudo systemctl start docker
 sudo groupadd docker
 sudo usermod -aG docker $USER
 newgrp docker
+```
+
+结束。
+
+## Windows 安装 Torch
+
+直接使用 pip 安装即可，需要指定 CUDA 版本：
+
+```bash
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
 ```
 
 结束。
