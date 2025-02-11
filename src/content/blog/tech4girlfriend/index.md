@@ -5,7 +5,6 @@ updatedDate: 2024-10-28
 description: 给女朋友的教程，所以从计算机完全零基础出发，教授一些学习生活中常用的技能。
 heroImage: {src : "thumbnail.webp", color: '#C0543E' }
 category: 'MISCs'
-language: '中文'
 tags:
     - 'Tech Talk'
     - Bug Report

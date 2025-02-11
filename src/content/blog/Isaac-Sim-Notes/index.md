@@ -5,7 +5,6 @@ updatedDate: 2025-01-18
 description: 关于 Isaac Sim，注定还有一段漫长的路。
 heroImage: {src : "thumbnail.webp", color: '#D70157' }
 category: 'Tech Talk'
-language: '中文'
 tags:
     - 'Tech Talk'
     - 'Embodied AI'

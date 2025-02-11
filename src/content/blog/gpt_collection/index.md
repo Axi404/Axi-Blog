@@ -5,7 +5,6 @@ updatedDate: 2024-11-24
 description: 使用 NextChat 调用 GPT api key，并且无推广单纯记录一些 GPT 转发站。
 heroImage: {src : "thumbnail.webp", color: '#A8B2AF' }
 category: 'Tech Talk'
-language: '中文'
 tags:
     - 'Tech Talk'
     - GPT 转发站

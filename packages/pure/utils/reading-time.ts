@@ -58,7 +58,7 @@ function countWords(text: string): number {
   return words
 }
 
-export function getReadingTime(text: string, wordsPerMinute: number = 100): ReadingTimeResult {
+export function getReadingTime(text: string, wordsPerMinute: number = 200): ReadingTimeResult {
   const words = countWords(text)
   const minutes = words / wordsPerMinute
   const time = Math.round(minutes * 60 * 1000)

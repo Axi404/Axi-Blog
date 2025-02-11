@@ -5,7 +5,6 @@ updatedDate: 2025-01-05
 description: 你是否在尺子上留下了刻度。2024，剧终。
 heroImage: {src : "thumbnail.webp", color: '#A09CB2' }
 category: 'Daily Talk'
-language: '中文'
 tags:
     - 'Daily Talk'
     - University

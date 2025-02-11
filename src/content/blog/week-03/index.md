@@ -5,7 +5,6 @@ updatedDate: 2024-07-23
 description: 2024-07-15 ~ 2024-07-21.
 heroImage: {src : "thumbnail.webp", color: '#415865' }
 category: 'Daily Talk'
-language: '中文'
 tags:
     - 'Daily Talk'
     - 'Weekly Journal'

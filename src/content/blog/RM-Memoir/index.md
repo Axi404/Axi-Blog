@@ -5,7 +5,6 @@ updatedDate: 2024-08-03
 description: 我的 RM 故事。
 heroImage: {src : "thumbnail.webp", color: '#7A7EAA' }
 category: 'Daily Talk'
-language: '中文'
 tags:
     - 'Daily Talk'
     - RoboMaster

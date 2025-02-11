@@ -5,7 +5,6 @@ updatedDate: 2024-10-04
 description: 品鉴 EndeavourOS 并且进行一些配置。
 heroImage: {src : "thumbnail.webp", color: '#191F51' }
 category: 'Tech Talk'
-language: '中文'
 tags:
     - 'Tech Talk'
     - EndeavourOS

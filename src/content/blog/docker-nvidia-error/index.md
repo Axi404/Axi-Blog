@@ -5,7 +5,6 @@ updatedDate: 2025-01-12
 description: '正常安装 Nvidia Docker 后运行时报错 Failed to initialize NVML: Unknown Error。'
 heroImage: {src : "thumbnail.webp", color: '#6461B2' }
 category: 'Tech Talk'
-language: '中文'
 tags:
     - 'Tech Talk'
     - Bug Report

@@ -5,7 +5,6 @@ updatedDate: 2025-02-02
 description: 因为一些指令比较常见，所以写一篇博客记录一下，以在将来方便同步。
 heroImage: {src : "thumbnail.webp", color: '#E29CEE' }
 category: 'Tech Talk'
-language: '中文'
 tags:
     - 'Tech Talk'
 ---

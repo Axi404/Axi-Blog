@@ -5,7 +5,6 @@ updatedDate: 2024-07-02
 description: 关于 Actions 与 Pages 的教程，暨 CSBAOYANDDL 技术分享。
 heroImage: {src : "thumbnail.webp", color: '#865A52' }
 category: 'Tech Talk'
-language: '中文'
 tags:
     - 'Tech Talk'
     - 'Github Action'

@@ -5,7 +5,6 @@ updatedDate: 2024-12-19
 description: 在 Ubuntu 22.04 安装 Ceres 1.14，出现了一些之前在 Ubuntu 20.04 没有出现过的问题，提供了解决方案。
 heroImage: {src : "thumbnail.webp", color: '#406377' }
 category: 'Tech Talk'
-language: '中文'
 tags:
     - 'Tech Talk'
     - Bug Report
