@@ -70,7 +70,8 @@ const typographyConfig = ({ theme }) => ({
 const config = {
   content: [
     './src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}',
-    './node_modules/astro-pure/components/**/*.astro'
+    './node_modules/astro-pure/components/**/*.astro',
+    './packages/pure/components/**/*.astro'
   ],
   darkMode: ['class'],
   safelist: ['dark'],
