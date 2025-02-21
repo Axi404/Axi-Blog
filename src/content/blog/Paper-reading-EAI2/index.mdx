@@ -1,7 +1,7 @@
 ---
 title: 'Paper Reading: Embodied AI 2'
 publishDate: 2024-12-13
-updatedDate: 2025-02-15
+updatedDate: 2025-02-22
 description: 从一些 Embodied AI 相关工作中扫过。
 heroImage: {src : "thumbnail.webp", color: '#7F2B32' }
 category: 'Paper Reading'
@@ -126,3 +126,24 @@ HPT 是 Kaiming He 团队在具身领域的新作，可以说是很直接也很�
 
 </ArxivRating>
 
+## SOFAR
+
+<ArxivRating id='2502.13143' tldr='训练了 3D 感知模块的 Prompt-based 方法，提出了大量的资产' rank={3}>
+
+![](https://pic.axi404.top/image.6m41683emh.webp)
+
+这一篇论文的工作量确实很大，第一次看到的时候确实被吓到了。首先是提出了一个标注的数据集，叫做 OrienText300K，这个数据集是一个 Objaverse 的数据集，使用 VLM 进行了一些三维标注，然后使用这个数据集训练了一个叫做 PointSO 的方向标注模型（事实上我比较怀疑这个流程和目前已有的一些 6Dof 姿态估计的方法之间的区别），接下来用这个模型进行了一个类似于 CoPA 一样的 Prompt-based 的方法，也就是 SOFAR。感觉是主打的这个 PointSO，因为后面这个方法甚至还在 Navigation 里面使用了，应该是一些这个 PointSO 的应用一样的感觉。
+
+<img src="https://pic.axi404.top/image.1sf6a3qhei.webp" alt="PointSO" style={{width: '50%'}}/>
+
+本质上 PointSO 的效果就是给你一组点云，并且说出来自己想要标注什么（比如说把手），然后 PointSO 会给你标注出这个内容的一个向量。而其结构本身就是比较经典的多模态的一个 Transformer 的结构。
+
+![](https://pic.axi404.top/image.8hglyupay8.webp)
+
+不得不说图画的是十分的好看的，但是这个向量真能如此有效？一想貌似确实差不多。本身 affordance 由 GPT 分析，然后交给 PointSO 进行标注，之后回到 GPT 里面去进一步分析，给出始末位置，之后直接生成动作，感觉是可行的。
+
+同时很吸引人的一点在于，这个模型确实做了大量的实验，本身工作是 Galbot 的，只能说工业界的积累确实足，大量的在 OXE 训练过的模型，确实不一般。
+
+不过还是有几个疑点，首先就是 Objaverse 真的能洗出来 300K 的数据吗，我对此怀疑。同时，这个工作提出了一个 Spatial 的 Bench，这里面用了一些别的模型比如说 RoboPoint 进行对比，这真的是能获得同样的输出吗，还是说都对于这些模型的输出做了一些后处理？
+
+</ArxivRating>
