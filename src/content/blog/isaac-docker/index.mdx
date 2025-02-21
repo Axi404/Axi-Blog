@@ -1,7 +1,7 @@
 ---
 title: Isaac Sim 一百讲（a）：Docker 使用
 publishDate: 2025-01-23
-updatedDate: 2025-01-23
+updatedDate: 2025-02-22
 description: 从零开始的 Isaac Sim 之路，间章！
 heroImage: {src : "thumbnail.webp", color: '#FF718A' }
 category: 'Tech Talk'
@@ -202,6 +202,56 @@ docker run -it --gpus 1 --name isaac-1 --gpus 1\
 之后比如说你在 `code` 中修改了代码，你不需要进入容器，你只需要在本地修改，然后容器就会自动同步，因为他们是同一个文件。
 
 然后再次执行上述的指令即可。
+
+## 在 Docker 中安装 CUDA
+
+尽管我们之前已经拥有了一个可以使用 `nvidia-smi` 的 Docker 了，但是稍微懂行的读者是知道的，`nvidia-smi` 只是 nvidia-driver 的一个工具，可以呼出界面只能说明你安装了 nvidia-driver，而使用 `nvcc -V` 则可以查看 CUDA 的版本，此时会报错，因为 Docker 中没有 CUDA。
+
+是的，Isaac Sim 会使用 CUDA，但是这是在 Isaac 的 Conda 环境中维护的一个 CUDA，而并不是 Docker 的 CUDA，但是在你使用 Docker 安装诸如 cuRobo 等库的时候，会需要使用 CUDA，因此本篇略微介绍一下。
+
+<LinkPreview href='https://developer.nvidia.com/cuda-11-8-0-download-archive?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=22.04&target_type=runfile_local' />
+
+依然是依照官网的方法，一个有趣的技巧在于使用 runfile 而非 deb 文件，因为 runfile 会自动帮你安装一些内容。
+
+```bash
+wget https://developer.download.nvidia.com/compute/cuda/11.8.0/local_installers/cuda_11.8.0_520.61.05_linux.run
+```
+
+注意在这里安装的是 11.8 版本，这是 Isaac 社区里面目前很常见的一个版本，比如说 cuRobo 的默认版本也是 11.8。在安装之前，你需要安装一些依赖：
+
+```bash
+apt update
+apt install sudo gcc g++ kmod
+```
+
+然后你就可以安装了：
+
+```bash
+sudo sh cuda_11.8.0_520.61.05_linux.run
+```
+
+在安装的过程中注意取消掉安装驱动，因为驱动已经安装过了。
+
+安装结束之后会出现一些提出，乍一看其实很像是报错，因为无序列表的语法很像是报错 track back 的时候经典的缩进，但是细看可以发现只是提示而已。
+
+![](https://pic.axi404.top/image.6bh7d44rsh.webp)
+
+之后需要添加一些配置：
+
+```bash title="~/.bashrc"
+export PATH=/usr/local/cuda-11.8/bin:$PATH # [!code ++]
+export LD_LIBRARY_PATH=/usr/local/cuda-11.8/lib64:$LD_LIBRARY_PATH # [!code ++]
+```
+
+```bash title="/etc/ld.so.conf.d/cuda-11-8.conf"
+/usr/local/cuda-11.8/lib64
+```
+
+```bash
+sudo ldconfig
+```
+
+之后你就可以在 `source ~/.bashrc` 之后使用 `nvcc -V` 查看 CUDA 的版本了，此时不会报错。
 
 ## 总结
 
