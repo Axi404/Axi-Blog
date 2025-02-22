@@ -20,7 +20,8 @@ const {
     updatedDate,
     comment: enableComment,
     tags,
-    language
+    language,
+    pixivLink
   },
   remarkPluginFrontmatter
 } = Astro.props
@@ -87,6 +88,16 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
         <span class='flex items-center gap-1'>
           <Icon name='earth' class='size-5' />
           {language}
+        </span>
+      )
+    }
+    {
+      pixivLink && (
+        <span class='flex items-center gap-1'>
+          <Icon name='moon' class='size-5' />
+          <a href={`https://www.pixiv.net/en/artworks/${pixivLink}`} target="_blank" rel="noopener noreferrer" class="hover:underline hover:underline-offset-4">
+            Hero Image
+          </a>
         </span>
       )
     }

@@ -35,7 +35,8 @@ const blog = defineCollection({
       language: z.string().optional(),
       draft: z.boolean().default(false),
       // Integrations
-      comment: z.boolean().default(true)
+      comment: z.boolean().default(true),
+      pixivLink: z.string().optional()
     })
 })
 
