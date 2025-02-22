@@ -5,6 +5,7 @@ updatedDate: 2024-12-20
 description: 平时遇到的奇怪代码问题，记录并整理。
 heroImage: {src : "thumbnail.webp", color: '#AB8187' }
 category: 'MISCs'
+pixivLink: '117648512'
 tags:
     - 'Tech Talk'
     - Bug Report

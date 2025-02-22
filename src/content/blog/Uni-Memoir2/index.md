@@ -5,6 +5,7 @@ updatedDate: 2025-01-05
 description: 我的大二生活。
 heroImage: {src : "thumbnail.webp", color: '#5773E9' }
 category: 'Daily Talk'
+pixivLink: '123626311'
 tags:
     - 'Daily Talk'
     - University

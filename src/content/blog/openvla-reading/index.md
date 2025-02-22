@@ -5,6 +5,7 @@ updatedDate: 2024-07-23
 description: OpenVLA 纯小白代码阅读记录。
 heroImage: {src : "thumbnail.webp", color: '#416592' }
 category: 'Code Reading'
+pixivLink: '113600258'
 tags:
     - 'Tech Talk'
     - LLM

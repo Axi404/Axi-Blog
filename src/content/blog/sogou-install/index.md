@@ -5,6 +5,7 @@ updatedDate: 2024-12-19
 description: 搜狗输入法在正常按照官方指南安装之后无法输出中文，提供了解决方案。
 heroImage: {src : "thumbnail.webp", color: '#E5DBA1' }
 category: 'MISCs'
+pixivLink: '91110244'
 tags:
     - 'Tech Talk'
     - Bug Report

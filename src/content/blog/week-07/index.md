@@ -5,6 +5,7 @@ updatedDate: 2024-08-25
 description: 2024-08-12 ~ 2024-08-18. 
 heroImage: {src : "thumbnail.webp", color: '#DE5108' }
 category: 'Daily Talk'
+pixivLink: "121246720"
 tags:
     - 'Daily Talk'
     - 'Weekly Journal'

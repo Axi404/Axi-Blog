@@ -5,6 +5,7 @@ updatedDate: 2024-12-19
 description: 在已有 Ubuntu 20.04 以及 Windows 的时候安装 Ubuntu 22.04 双系统并且修复一些 Bugs。
 heroImage: {src : "thumbnail.webp", color: '#76B2B7' }
 category: 'MISCs'
+pixivLink: '110373783'
 tags:
     - 'Tech Talk'
     - Bug Report
