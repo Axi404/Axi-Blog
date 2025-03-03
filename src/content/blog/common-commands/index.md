@@ -84,3 +84,16 @@ pip install torch torchvision torchaudio --index-url https://download.pytorch.or
 ```
 
 结束。
+
+## Miniconda 安装
+
+参考 [Miniconda 文档](https://www.anaconda.com/docs/getting-started/miniconda/install)：
+
+```bash
+mkdir -p ~/miniconda3
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
+bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
+rm ~/miniconda3/miniconda.sh
+```
+
+结束。
