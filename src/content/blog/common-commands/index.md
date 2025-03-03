@@ -96,4 +96,11 @@ bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
 rm ~/miniconda3/miniconda.sh
 ```
 
+之后激活环境并且进行初始化：
+
+```bash
+source ~/miniconda3/bin/activate
+conda init --all
+```
+
 结束。
