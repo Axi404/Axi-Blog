@@ -1,0 +1,32 @@
+---
+title: Manipulation RL 的终结
+publishDate: 2025-03-11
+updatedDate: 2025-03-11
+description: 一则非内行人士的不专业看法。
+heroImage: {src : "thumbnail.webp", color: '#13378D' }
+category: 'Tech Talk'
+pixivLink: '127766591'
+tags:
+    - 'Tech Talk'
+    - 'RL'
+---
+
+## 前言
+
+伴随着 Deepseek R1 的横空出世，GRPO 为主的 RL 方法在 MLLM 中进行 fine-tuning 的浪潮迎来了高潮，而在此之前，伴随着 o1/o3 的发布，学界在此话题上的也早已经探索了许久。然而事实上，RL 这一历史悠久的方法，最早在 rule-based 的游戏中被长足发展，诸如 AlphaGo 等，均在历史上留下了浓墨重彩的一笔。
+
+然而，在 Robotics 这一领域，RL 方法的探索似乎并不如在 MLLM 中那么顺利。事实上 RL 是一种见效极快的方法，在大多数的任务中，依赖于 GPU 的高度并行，同时训练大量的 RL-policy，大概率都可以得到一个不错的结果，在 locomotion 任务中，更是如此。然而，尽管当前也有一些基于 RL 的 Manipulation 任务的方法，而且看上去效果也不错，但是，以鄙人之愚见，RL 在 Manipulation 任务中似乎即将迎来终结。
+
+## 定义
+
+首先让我们区分 RL 和 RLHF。事实上，在我看来，MLLM 的大多数 RL，其本质上依然是 RLHF，即按照某种偏好进行调优。RL 与 RLHF 在我的观点中，其本质的区别在于，目标是完成任务还是满足人的偏好。诸如，对于一个 Manipulation policy，把香蕉放到盘子里，这是一个完成任务的例子；而平稳丝滑地把香蕉放到盘子里，gripper 不会过度地晃动，则是一个满足人的偏好的例子。通过 RLHF 的方法，将一些更合理的抓握方法来 fine-tuning 一个 policy，来显式引导模型做出合理的抓握，这听上去是一个合理的过程，会让过程变得优雅，但是也可能陷入之前 MLLM 所谓「难以超过人类的困境」，不过目前来看，这种方法确实还有巨大的研究空间。
+
+然而标准的 RL 却并非如此。
+
+## 生态位的窘境
+
+在讨论之前，我们必须要达成一个共识，我们很难训练出来一个具有强大泛化能力的 RL Model，目前已知的基本上全部的 RL Policy 都是在
+
+
+
+
