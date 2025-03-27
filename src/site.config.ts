@@ -24,7 +24,7 @@ export const theme: ThemeUserConfig = {
   },
   /** Set a logo image to show in the homepage. */
   logo: {
-    src: 'src/assets/avatar.webp',
+    src: 'src/assets/avatar.png',
     alt: 'Avatar'
   },
 
@@ -86,7 +86,7 @@ export const integ: IntegrationUserConfig = {
       { name: 'Name', val: theme.title },
       { name: 'Desc', val: theme.description || 'Null' },
       { name: 'Link', val: 'https://axi404.top' },
-      { name: 'Avatar', val: 'https://axi404.top/avatar/avatar.webp' }
+      { name: 'Avatar', val: 'https://axi404.top/avatar/avatar.png' }
     ]
   },
   // Enable page search function

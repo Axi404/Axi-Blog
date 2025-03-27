@@ -7,7 +7,7 @@ import { Button, Card, Icon, Label, Spoiler } from 'astro-pure/user'
 import PageLayout from '@/layouts/BaseLayout.astro'
 import Section from '@/components/home/Section.astro'
 import SkillLayout from '@/components/home/SkillLayout.astro'
-import avatar from '@/assets/avatar.webp'
+import avatar from '@/assets/avatar.png'
 import config from '@/site-config'
 
 const languages = ['Python', 'C++', 'C', 'Shell']
@@ -21,38 +21,38 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
 <PageLayout meta={{ title: 'Home' }} highlightColor='#659EB966'>
   <main class='flex w-full flex-col items-center'>
     <section class='animate mb-10 flex flex-col items-center gap-y-7' id='content-header'>
-      <Image
-        src={avatar}
-        alt='profile'
-        class='h-28 w-auto rounded-full border p-1'
-        loading='eager'
-      />
-
-      <div class='flex flex-col items-center gap-y-4'>
-        <h1 class='text-3xl font-bold'>{config.author}</h1>
-        <div class='flex flex-wrap justify-center gap-x-7 gap-y-3'>
-          <Label title='China'>
-            <Icon name='location' class='size-5' slot='icon' />
-          </Label>
-          <Label
-            title='Github'
-            as='a'
-            href='https://github.com/Axi404'
-            target='_blank'
-          >
-            <Icon name='github' class='size-5' slot='icon' />
-          </Label>
-          <Label title='Email' as='a' href='mailto:gaoning@pjlab.org.cn'>
-            <Icon name='email' class='size-5' slot='icon' />
-          </Label>
-          <Label title='Scholar' as='a' href='https://scholar.google.com/citations?user=W9mT0rcAAAAJ&hl=zh-CN'>
-            <Icon name='earth' class='size-5' slot='icon' />
+      <div class='flex flex-row items-center gap-x-6'>
+        <Image
+          src={avatar}
+          alt='profile'
+          class='h-36 w-auto rounded-lg border p-1'
+          loading='eager'
+        />
+        <div class='flex flex-col gap-y-4'>
+          <h1 class='text-3xl font-bold'>{config.author}</h1>
+          <div class='flex flex-wrap gap-x-7 gap-y-3'>
+            <Label title='China'>
+              <Icon name='location' class='size-5' slot='icon' />
             </Label>
+            <Label
+              title='Github'
+              as='a'
+              href='https://github.com/Axi404'
+              target='_blank'
+            >
+              <Icon name='github' class='size-5' slot='icon' />
+            </Label>
+            <Label title='Email' as='a' href='mailto:gaoning@pjlab.org.cn'>
+              <Icon name='email' class='size-5' slot='icon' />
+            </Label>
+            <Label title='Scholar' as='a' href='https://scholar.google.com/citations?user=W9mT0rcAAAAJ&hl=zh-CN'>
+              <Icon name='earth' class='size-5' slot='icon' />
+            </Label>
+          </div>
         </div>
       </div>
 
-      <!-- {/* Get template */}
-      <a
+      <!-- <a
         href='https://axi404.github.io/cv/'
         target='_blank'
         class='flex flex-row items-center gap-x-3 rounded-full border border-border bg-background px-4 py-2 text-sm shadow-sm transition-shadow hover:shadow-md'
