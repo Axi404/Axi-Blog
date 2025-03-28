@@ -14,4 +14,243 @@ tags:
 
 import { LinkPreview } from 'astro-pure/advanced'
 
-在此之前，我们已经了解了了解了如何在场景中添加一个物体了，那么在正式认识机器人之前，我们来简单地认识一下 Isaac Sim 中的碰撞。碰撞
+## 前言
+
+在此之前，我们已经了解了了解了如何在场景中添加一个物体了，那么在正式认识机器人之前，我们来简单地认识一下 Isaac Sim 中的碰撞。碰撞在内的物理仿真是 Isaac Sim 中一个非常重要的组成部分，甚至说，没有这些物理，Simulator 就无从谈起。毕竟从一开始，仿真关注的就是物理仿真，在此之后才有的图像渲染。
+
+让我们先思考一下一个现实中的物体的物理是如何运作的，一般来说，物体需要遵守牛顿定律，也就是在受到力的情况下会运动，而同时，这个物体还需要可以和其他物体进行碰撞。在这其中，牛顿定律的部分在 Isaac Sim 中被描述为 RigidBodyAPI，通过对物体施加这个 API，物体就可以受到力的作用。而同时，碰撞这一部分则是 collision 处理的范围。
+
+## Rigid Prim
+
+让我们先创建一个初始的程序。
+
+
+```python
+import numpy as np
+from isaacsim import SimulationApp
+simulation_app = SimulationApp({"headless": False}) # we can also run as headless.
+
+from omni.isaac.core import World
+from omni.isaac.core.objects import VisualCuboid
+from omni.isaac.core.utils.prims import get_prim_at_path
+
+world = World()
+world.scene.add_default_ground_plane()
+cube1 = world.scene.add(
+    VisualCuboid(
+        prim_path="/World/cube1",
+        name="cube1",
+        position=np.array([0, 0, 1.0]),
+        scale=np.array([0.5015, 0.5015, 0.5015]),
+        color=np.array([0, 0, 1.0]),
+    ))
+cube1_prim = get_prim_at_path("/World/cube1")
+for _ in range(10000):
+    world.step()
+simulation_app.close()
+```
+
+运行它，你可以看到一个 Cube 出现在了你的 GUI 中，点击左侧栏的播放键，此时就开始运行了。
+
+![image](https://pic.axi404.top/image.2vewz0ps1w.webp)
+
+不过读者不难发现，这个 Cube 是悬浮在半空中的，不会受到力的作用，也不会有任何的反馈。在 GUI 中，`shift` + 左键可以用来在场景里面施加力的，但是你会发现你现在无从操作，等物体被添加了 Rigid 属性之后，你就可以一窥这个操作的效果了。
+
+接下来，让我们来加入一些物理设置。我们可以通过 pxr 来进行一些 USD 的操作。包括之前，读者应该也都不难发现，若干的 USD 相关的操作，都是通过 pxr 调用的。`pxr` 是 Pixar 出品的 USD C++ API 的 Python 绑定，也就可以用它来调用一些喜闻乐见的函数。
+
+修改代码：
+
+```python
+cube1_prim = get_prim_at_path("/World/cube1")
+from pxr import UsdPhysics # [!code ++]
+rigid_body_api = UsdPhysics.RigidBodyAPI.Apply(cube1_prim) # [!code ++]
+for _ in range(10000):
+    world.step()
+```
+
+再次打开运行程序的时候，并点击播放键的时候，不难看到这样的效果：
+
+![](https://pic.axi404.top/PixPin_2025-03-29_04-31-31.5j4d9dv6hm.gif)
+
+可以看到我们的 Prim 已经被添加了 Rigid 属性，并且可以受到力了，只是因为没有碰撞，所以直接穿墙而过。
+
+我们同样可以用 Rigid Body 的 API 来进行一些有趣的操纵，比如说：
+
+```python
+from pxr import UsdPhysics
+rigid_body_api = UsdPhysics.RigidBodyAPI.Apply(cube1_prim)
+from pxr import PhysxSchema # [!code ++]
+rigid_body_schema = PhysxSchema.PhysxRigidBodyAPI.Apply(cube1_prim) # [!code ++]
+rigid_body_schema.CreateDisableGravityAttr().Set(True) # [!code ++]
+```
+
+运行程序，你会发现这个 Cube 不会受到重力了。但是因为这个物体还没有被施加一个碰撞箱，因此我们不能用 `shift` + 左键来施加力，后续我们会展示在这个无重力情况下的有趣视觉效果。
+
+在这里我们需要额外注意的是，我们同样是在使用 `pxr` 来操作这个物体，但是此时我们使用的是 `PhysxSchema` 而不是 `UsdPhysics`。简单来理解的话，PhysxSchema 是 Physx 的 C++ API 的 Python 绑定，而 UsdPhysics 是 USD 的 C++ API 的 Python 绑定。在 UsdPhysics 中，本质上是 USD 的协议规定了一系列的物理属性，但是这些物理属性还难以严谨地描述物理仿真，因此我们使用 PhysxSchema 作为一个 「DLC」 来补充物理仿真的各种设置。
+
+关于 PhysxSchema 的更多内容，你可以参考这个网页：
+
+<LinkPreview href="https://docs.omniverse.nvidia.com/kit/docs/omni_usd_schema_physics/106.1/index.html" />
+
+具体来说，比如刚才展示的 `CreateDisableGravityAttr`，你可以依次打开 `Classes->Class List->PhysxSchemaPhysxRigidBodyAPI`，就可以找到函数 `CreateDisableGravityAttr` 的说明。
+
+## Collision
+
+既然我们已经获得了一个 Rigid Prim 了，那么接下来，让我们给这个物体添加一些碰撞箱吧。使用以下的代码：
+
+```python
+cube1_prim = get_prim_at_path("/World/cube1")
+from pxr import UsdPhysics
+rigid_body_api = UsdPhysics.RigidBodyAPI.Apply(cube1_prim)
+collision_api = UsdPhysics.CollisionAPI.Apply(cube1_prim) # [!code ++]
+mesh_collision_api = UsdPhysics.MeshCollisionAPI.Apply(cube1_prim) # [!code ++]
+mesh_collision_api.CreateApproximationAttr().Set("convexDecomposition") # [!code ++]
+collision_api.GetCollisionEnabledAttr().Set(True) # [!code ++]
+for _ in range(10000):
+    world.step()
+```
+
+运行之后不难看到这样的效果，这下不会穿模了。
+
+![](https://pic.axi404.top/PixPin_2025-03-29_04-51-47.45hu5da919.gif)
+
+你可以在 GUI 的右侧看到这样的 Collider 设置：
+
+![](https://pic.axi404.top/image.esok4o93w.webp)
+
+## Collision 进阶
+
+Cube 太简单了，还记得我们在[第三讲](isaac-3)管理的资产吗，我们写了一个 `add_usd_to_world` 函数，我们在这里可以展示另一种将 usd 添加到场景中的方案，当然，它们是等价的。然后我们把上述的内容都重新执行一次。
+
+```python
+import numpy as np
+from isaacsim import SimulationApp
+simulation_app = SimulationApp({"headless": False}) # we can also run as headless.
+
+from omni.isaac.core import World
+from omni.isaac.core.objects import VisualCuboid
+from omni.isaac.core.utils.prims import get_prim_at_path
+from omni.isaac.core.utils.prims import create_prim # [!code ++]
+world = World()
+world.scene.add_default_ground_plane()
+cube1 = world.scene.add( # [!code --]
+    VisualCuboid( # [!code --]
+        prim_path="/World/cube1", # [!code --]
+        name="cube1", # [!code --]
+        position=np.array([0, 0, 1.0]), # [!code --]
+        scale=np.array([0.5015, 0.5015, 0.5015]), # [!code --]
+        color=np.array([0, 0, 1.0]), # [!code --]
+    )) # [!code --]
+prim = create_prim( # [!code ++]
+        prim_path="/World/banana", # [!code ++]
+        prim_type="Xform", # [!code ++]
+        usd_path="categories/usds/banana/0ac2e7f320d44e84a2647cd81f250107.usd", # [!code ++]
+        translation=np.array([0, 0, 0.3]), # [!code ++]
+        scale=np.array([0.01, 0.01, 0.01]), # [!code ++]
+    ) # [!code ++]
+cube1_prim = get_prim_at_path("/World/cube1") # [!code --]
+banana_prim = get_prim_at_path("/World/banana") # [!code ++]
+from pxr import UsdPhysics
+rigid_body_api = UsdPhysics.RigidBodyAPI.Apply(cube1_prim) # [!code --]
+rigid_body_api = UsdPhysics.RigidBodyAPI.Apply(banana_prim) # [!code ++]
+collision_api = UsdPhysics.CollisionAPI.Apply(cube1_prim) # [!code --]
+collision_api = UsdPhysics.CollisionAPI.Apply(banana_prim) # [!code ++]
+mesh_collision_api = UsdPhysics.MeshCollisionAPI.Apply(cube1_prim) # [!code --]
+mesh_collision_api = UsdPhysics.MeshCollisionAPI.Apply(banana_prim) # [!code ++]
+mesh_collision_api.CreateApproximationAttr().Set("convexDecomposition")
+collision_api.GetCollisionEnabledAttr().Set(True)
+for _ in range(10000):
+    world.step()
+simulation_app.close()
+```
+
+需要注意的是，因为加载进来的 USD 并不是具有某个标准尺寸，所以说你可能要调整 scale 以及 translation 的参数，才能让这个 USD 可以用一个正常的尺寸进行展示。在后续的内容中，我们会展示如何来用一个统一的尺度管理这些 USD，但是至于现在嘛，先手动调整一下。
+
+然后，读者可以在 GUI 里面开启 Collider 的可视化。
+
+![](https://pic.axi404.top/image.2yyiwsc7tq.webp)
+
+![](https://pic.axi404.top/image.4cl20tpm3l.webp)
+
+读者可以看到这个 Collider 的贴合效果并不是很好。而一般来说，我们确实会使用 `convexDecomposition` 来作为这个 Collider 的近似。除此之外，你还可以使用 `none` 或者 `convexHull` 或者 `sdf`。`sdf` 更加精细，但是需要配置若干 GPU 的内容，我们在将来的间章中再介绍，而另外两个从名字来看就不难发现效果不好。
+
+我们添加一段代码，来用 physx 来设置更加合理的参数：
+
+```python
+import numpy as np
+from isaacsim import SimulationApp
+simulation_app = SimulationApp({"headless": False}) # we can also run as headless.
+
+from omni.isaac.core import World
+from omni.isaac.core.objects import VisualCuboid
+from omni.isaac.core.utils.prims import get_prim_at_path
+from omni.isaac.core.utils.prims import create_prim
+world = World()
+world.scene.add_default_ground_plane()
+prim = create_prim(
+        prim_path="/World/banana",
+        prim_type="Xform",
+        usd_path="/home/gaoning/grasp_vla_assets/categories/usds/banana/0ac2e7f320d44e84a2647cd81f250107.usd",
+        translation=np.array([0, 0, 0.3]),
+        scale=np.array([0.01, 0.01, 0.01]),
+    )
+banana_prim = get_prim_at_path("/World/banana")
+from pxr import UsdPhysics
+rigid_body_api = UsdPhysics.RigidBodyAPI.Apply(banana_prim)
+collision_api = UsdPhysics.CollisionAPI.Apply(banana_prim)
+mesh_collision_api = UsdPhysics.MeshCollisionAPI.Apply(banana_prim)
+mesh_collision_api.CreateApproximationAttr().Set("convexDecomposition")
+collision_api.GetCollisionEnabledAttr().Set(True)
+from pxr import PhysxSchema # [!code ++]
+collision_schema = PhysxSchema.PhysxConvexDecompositionCollisionAPI.Apply(banana_prim) # [!code ++]
+collision_schema.CreateHullVertexLimitAttr().Set(64) # [!code ++]
+collision_schema.CreateMaxConvexHullsAttr().Set(64) # [!code ++]
+collision_schema.CreateMinThicknessAttr().Set(0.001) # [!code ++]
+collision_schema.CreateShrinkWrapAttr().Set(True) # [!code ++]
+collision_schema.CreateErrorPercentageAttr().Set(0.1) # [!code ++]
+for _ in range(10000):
+    world.step()
+simulation_app.close()
+```
+
+此时再次运行程序，你会发现这个香蕉的碰撞箱更加合理了。
+
+![](https://pic.axi404.top/image.5j4d9fpyln.webp)
+
+这其中 `CreateHullVertexLimitAttr` 以及 `CreateMaxConvexHullsAttr` 都是在设置 Collider 的面数，此处的面数不需要太高。`CreateMinThicknessAttr` 设置了 Collider 最薄的地方，不然假如说物体本身很细，就可能会穿模。`CreateShrinkWrapAttr` 和 `CreateErrorPercentageAttr` 是一切的关键，你可以发现这两个参数使得 Colldier 贴合了，第一个是开启贴合的优化，第二个则是指定错误率的上限。
+
+在这里给出一个更加完整的 Code，包括其他的 Collider 的设置：
+
+```python
+def set_colliders(prim_path, collision_approximation="convexDecomposition"):
+    prim = get_prim_at_path(prim_path)
+    collider = UsdPhysics.CollisionAPI.Apply(prim)
+    mesh_collider = UsdPhysics.MeshCollisionAPI.Apply(prim)
+    mesh_collider.CreateApproximationAttr().Set(collision_approximation)
+    collider.GetCollisionEnabledAttr().Set(True)
+    if collision_approximation == "convexDecomposition":
+        collision_api = PhysxSchema.PhysxConvexDecompositionCollisionAPI.Apply(prim)
+        collision_api.CreateHullVertexLimitAttr().Set(64)
+        collision_api.CreateMaxConvexHullsAttr().Set(64)
+        collision_api.CreateMinThicknessAttr().Set(0.001)
+        collision_api.CreateShrinkWrapAttr().Set(True)
+        collision_api.CreateErrorPercentageAttr().Set(0.1)
+    elif collision_approximation == "convexHull":
+        collision_api = PhysxSchema.PhysxConvexHullCollisionAPI.Apply(prim)
+        collision_api.CreateHullVertexLimitAttr().Set(64)
+        collision_api.CreateMinThicknessAttr().Set(0.00001)
+    elif collision_approximation == "sdf":
+        collision_api = PhysxSchema.PhysxSDFMeshCollisionAPI.Apply(prim)
+        collision_api.CreateSdfResolutionAttr().Set(1024)
+    return prim
+```
+
+在此处不展开介绍。
+
+## 休息一下
+
+好了，我们现在已经了解了 Collider 以及 Rigid 如何设置，之后的间章中，我们可能会进一步讨论这些问题，比如说应该如何规避穿模之类的情况。不过，最后，让我们再看一次，太空中飞行的香蕉。
+
+![](https://pic.axi404.top/PixPin_2025-03-29_05-34-48.73u48x1srl.gif)
+
+祝你开心~
