@@ -184,3 +184,11 @@ HPT 是 Kaiming He 团队在具身领域的新作，可以说是很直接也很�
 也算是一篇比较直观的论文，Object-centric 的思路进行数据生成，检测物体的位置，按照之前采集的轨迹变换到新的轨迹，然后 replay，进行数据生成。然而我认为这种 position 泛化的 scaling 本身已经是比较不是特别有效的 scaling 了，可能物体以及其他环境的 diversity 更重要，因此这篇可能将来收集 demo 场景会比较有用。不过有没有可能，demogen 的 demo 不是 demonstration 而是 demo 呢？
 
 </ArxivRating>
+
+## ArticuBot
+
+<ArxivRating id='2503.03045' tldr='使用 articulation object 的 axis 进行数据生成' rank={3}>
+
+本身论文里没有配很直观的图。论文提了一个方法和一个数据生成流程，方法没什么意思，主要将数据生成的流程。Articulation object，比如说笔记本或者柜子其实是大多数的，这些物体都只有一个自由度，因此假如说你标注了一个可以抓握的 pose，你就可以用这个轴进行旋转，并且通过变换得到旋转后的 Pose，进而组成 action 序列，然后生成数据。这是一个简单有效的方法，说实话我之前一月份的时候也提出过这个 idea，但是目前他们做出来了。抓住绝大多数 articulation 物体只有一个自由度，然后对这个自由度施加变换是一个很本质的事情，并且可以借此直接解决绝大多数 articulation 数据生成的问题。
+
+</ArxivRating>
