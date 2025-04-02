@@ -1,0 +1,65 @@
+---
+title: GitFlow 讲解
+publishDate: 2025-04-02
+updatedDate: 2025-04-02
+description: .
+heroImage: {src : "thumbnail.webp", color: '#D7C2D7' }
+category: 'Daily Talk'
+pixivLink: '128454999'
+draft: true
+tags:
+    - 'Daily Talk'
+    - 'Weekly Journal'
+---
+
+import { Steps } from 'astro-pure/user'
+
+
+## 前言
+
+在日常开发中，一个良好的分支管理策略对于团队协作至关重要。因为最近在科研中涉及了更大的多人协作项目，所以了解了这方面的内容。Gitflow 是一套非常经典的 Git 分支模型，它为不同阶段的开发活动提供了明确的流程划分，尤其适合版本发布频繁的项目。
+
+本文将通过一张图直观讲解 Gitflow 的流程与各个分支的职责。
+
+![Gitflow 工作流示意图](https://pic.axi404.top/image.361qy5ucbi.webp)
+
+## 核心分支介绍
+
+Gitflow 定义了以下五类分支，每种分支都有特定的用途：
+
+- **Main（主分支）**：  
+  用于存放每一个正式发布的版本。所有的发布版本都应该是从该分支打的 tag。
+
+- **Develop（开发分支）**：  
+  所有新功能、改动的集成基础。它是 Feature 分支的汇聚点，同时也是 Release 分支的起点。
+
+- **Feature（功能分支）**：  
+  用于开发具体的功能，一般从 `develop` 分支拉出，开发完成后合并回 `develop`。
+
+- **Release（预发布分支）**：  
+  当 `develop` 上的功能准备就绪，即可从 `develop` 拉出 `release` 分支做最后测试和优化，最终合并到 `main` 和 `develop`。
+
+- **Hotfix（热修复分支）**：  
+  如果线上版本（即 `main` 分支）发现严重 bug，立即从 `main` 分出 `hotfix` 分支进行修复，修复后合并回 `main` 和 `develop`。
+
+## Gitflow 工作流程详解
+
+结合上面的图，我们可以梳理出 Gitflow 的使用流程：
+
+<Steps>
+
+1. **从 `develop` 分出 `feature` 分支开发功能**  
+   多个功能可以并行开发，开发完毕后合并回 `develop`。
+
+2. **当一阶段功能开发完毕，从 `develop` 分出 `release` 分支**  
+   此分支用于版本测试、Bug 修复、文档编写等准备工作，稳定后合并到 `main` 和 `develop`。
+
+3. **版本正式发布，从 `main` 打 tag 标记版本号**  
+   这是对外发布的稳定版本。
+
+4. **线上发现 Bug，基于 `main` 创建 `hotfix` 分支快速修复**  
+   修复完成后，合并回 `main`（以发布修复版本）和 `develop`（同步代码）。
+
+</Steps>
+
+当然，事实上对于我来说，可能会一直使用 Develop 分支。祝你好运。
