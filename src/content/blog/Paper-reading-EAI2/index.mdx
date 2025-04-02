@@ -1,7 +1,7 @@
 ---
 title: 'Paper Reading: Embodied AI 2'
 publishDate: 2024-12-13
-updatedDate: 2025-02-22
+updatedDate: 2025-04-02
 description: 从一些 Embodied AI 相关工作中扫过。
 heroImage: {src : "thumbnail.webp", color: '#7F2B32' }
 category: 'Paper Reading'
@@ -172,5 +172,15 @@ HPT 是 Kaiming He 团队在具身领域的新作，可以说是很直接也很�
 回到正题，之后方法用了 VLM 去拆分任务，之后分步执行。综上，就是意料之中，也不是很现代，说是效果很好，又刷了若干点，但是问题在于，规模貌似又很小，真的有效吗？
 
 讲一句题外话，相较于 RL 最近在 MLLM 大放异彩，但是 EAI 只要依然依赖于仿真，需要大量的物理模拟和渲染，那么大规模 o1-like rl scaling 就很难奏效，因为时间实在是太慢。RL 是一个可以在 Robotics 中快速见效的方法，并且在诸如 Locomotion 等领域应用广泛，但是在环境输入不单调、追求泛化的 Manipulation 与 Navigation 中，短期之内依然看不到曙光。而假如不在这种场合来使用，和 by script 的数据收集比起来，RL 的效率也并不占优，在 Manipulation 中暂时来看只能作为一种短暂的方法而存在。
+
+</ArxivRating>
+
+## DemoGen
+
+<ArxivRating id='2502.16932' tldr='使用 Replay 进行数据生成' rank={2}>
+
+![](https://pic.axi404.top/image.1e8s3acylt.webp)
+
+也算是一篇比较直观的论文，Object-centric 的思路进行数据生成，检测物体的位置，按照之前采集的轨迹变换到新的轨迹，然后 replay，进行数据生成。然而我认为这种 position 泛化的 scaling 本身已经是比较不是特别有效的 scaling 了，可能物体以及其他环境的 diversity 更重要，因此这篇可能将来收集 demo 场景会比较有用。不过有没有可能，demogen 的 demo 不是 demonstration 而是 demo 呢？
 
 </ArxivRating>
