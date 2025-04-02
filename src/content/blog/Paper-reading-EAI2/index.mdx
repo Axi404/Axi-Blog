@@ -193,12 +193,22 @@ HPT 是 Kaiming He 团队在具身领域的新作，可以说是很直接也很�
 
 </ArxivRating>
 
+## LAPA
+
+<ArxivRating id='2503.14734' tldr='可以用 Video 数据来进行预训练' rank={4}>
+
+![](https://pic.axi404.top/image.32i50qt7z0.webp)
+
+这一篇作为 GR00T 的前置来看，分为了三个步骤，分别是 action 的 pretrain，VLA 的 pretrain 以及一个 finetune。本身最有意思的还是第一个环节，也就是用 VQ-VAE 来生成 latent action 的这个操作。可以看到 $x_1$ 和 $x_2$ 是相隔了几帧的图片，输入到 encoder 里面求出来 z，之后用 $z$ 和 $x_1$ 恢复 $x_2$。这个流程有趣的地方是，我们可以获得这样一个比喻，本质上 encoder 做的事情就是求逆运动学，也就是已知当前和目标，求中间的动作；而 decoder 做的事情就是求正运动学，也就是已知当前和动作，求目标。这个流程之后，我们就已经给全部的 Video 数据凭空标注了 action 信息了，这种 action 称之为 latent action。需要注意的是，latent action 并不是某种类似于 action 经过 embedding 之后转化为了 latent，而是可以理解为描述了某种抽象的 embodiment 的 action。即，latent action 和诸如 franka action 等是一个 level 的。之后就是第二阶段，本身可以理解为在用 Video 的 V 以及 GPT 标注的 L 以及这里获得的 A 来将 VLM 预训练为 VLA，之后最后第三阶段，在真实的数据集上去 finetune。
+
+</ArxivRating>
+
 ## GR00T
 
 <ArxivRating id='2503.14734' tldr='解决了数据金字塔的端到端 VLA' rank={4}>
 
 ![](https://pic.axi404.top/image.7zqluepb7d.webp)
 
-这一篇是我非常喜欢的了。本身的话，虽然你看这个 pipeline 很像是某种双系统，而且论文中也可以看到类似频率差异的表述，但是实际上只是一个快慢系统罢了。其中 VLM 只是一个 VL encoder，而下面的部分则是 action encoder，最后放到一起 fusion。很有趣的一点是，这篇使用了
+这一篇是我非常喜欢的了。本身的话，虽然你看这个 pipeline 很像是某种双系统，而且论文中也可以看到类似频率差异的表述，但是实际上只是一个快慢系统罢了。其中 VLM 只是一个 VL encoder，而下面的部分则是 action encoder，最后放到一起 fusion。很有趣的一点是，这篇使用了 LAPA 的方法来做 Web Video 数据的标注，从而将数据金字塔，即 `Real-World Data + Synthetic Data + Web Data & Human Videos` 都统一为了相同的 VLA 格式。之后就是直接预训练了，没啥问题。
 
 </ArxivRating>
